@@ -62,10 +62,15 @@ body{
 .mono{font-family:var(--mono);font-size:12.5px;letter-spacing:-.01em}
 
 /* ---------- masthead ---------- */
-header{padding:56px 0 30px;border-bottom:2px solid var(--ink)}
+header{padding:56px 0 30px;border-bottom:2px solid var(--ink);position:relative}
 .kicker{
   font-family:var(--disp);text-transform:uppercase;letter-spacing:.3em;
   font-size:11px;font-weight:700;color:var(--ink-3);margin-bottom:20px;
+}
+#timestamp{
+  position:absolute;top:56px;right:0;font-family:var(--disp);
+  text-transform:uppercase;letter-spacing:.12em;font-size:10.5px;
+  font-weight:700;color:var(--ink-3);white-space:nowrap;
 }
 h1{
   font-family:var(--disp);font-weight:700;
@@ -263,6 +268,7 @@ footer{
   .fact{flex:1 1 46%;border-bottom:1px solid var(--hair)}
   .tabs-nav{margin:0 -16px}
   .tabs-nav-inner{padding:0 16px}
+  #timestamp{position:static;margin-top:12px;margin-bottom:12px}
 }
 </style>
 </head>
@@ -271,6 +277,7 @@ footer{
 
 <header>
   <div class="kicker">Route Log · Party of Eight · Three Vehicles</div>
+  <div id="timestamp"></div>
   <h1>Jasper <span class="amp">&</span><br>Banff</h1>
   <div class="dates">September 3 – 19, 2026</div>
 
@@ -286,7 +293,7 @@ footer{
   <div class="facts">
     <div class="fact"><b>3,973</b><span>Miles total</span></div>
     <div class="fact"><b>2</b><span>Icefields runs</span></div>
-    <div class="fact"><b>5</b><span>Hot spring soaks</span></div>
+    <div class="fact"><b>6</b><span>Hot spring soaks</span></div>
     <div class="fact"><b>$0</b><span>Jasper park fees</span></div>
   </div>
 </header>
@@ -325,15 +332,20 @@ footer{
   <p>Underground parking is <strong>7'3" maximum height and the unit gets one space.</strong> You'll arrive with three vehicles. The listing also flags active construction on both sides of the building during working hours.</p>
 </div>
 
+<div class="adv gold">
+  <h3>Book Talbot Lake rowboat · Tue Sept 8</h3>
+  <p><strong>Rowboat rental on Talbot Lake for a full fishing day.</strong> Reserve through FareHarbor (Curries Guiding). 12-hour rental ~$163. Optional electric motor $50. Crystal-clear water, quiet lake, perfect for a middle-trip break day.</p>
+</div>
+
 <h2>Book this week</h2>
 
 <table class="tbl">
   <tr><th>Item</th><th>Timing</th></tr>
   <tr><td><strong>Hinton hotel, Sat Sept 5</strong></td><td class="num">Today</td></tr>
   <tr><td>Jamestown ND (Thu 3) & Calgary or Cochrane (Fri 4)</td><td class="num">This week</td></tr>
+  <tr><td><strong>Talbot Lake rowboat rental, Tue Sept 8</strong></td><td class="num">Now</td></tr>
   <tr><td><strong>Moraine Lake shuttle</strong> — set an alarm. One booking holds 10 seats. Pick Moraine Lake as first destination; the free Lake Connector runs you to Lake Louise after.</td><td class="num">8:00am MDT<br>Thu Sept 10</td></tr>
   <tr><td>Moraine Lake Bus Company — insurance</td><td class="num">Now</td></tr>
-  <tr><td>Maligne Lake cruise to Spirit Island (~C$116)</td><td class="num">For Mon 7</td></tr>
   <tr><td>Banff Gondola & Jasper SkyTram</td><td class="num">Now</td></tr>
 </table>
 
@@ -378,7 +390,7 @@ footer{
   </div>
   <div class="char">
     <h4>K-G</h4>
-    <p>The elder statesman whose foot is "totally fine" and will remain "totally fine" until approximately mile 6 of any hike, at which point it develops opinions. Will refuse trekking poles for two days and use them for the rest of the trip. A man who deserves four hot springs and got five, the universe correcting itself.</p>
+    <p>The elder statesman whose foot is "totally fine" and will remain "totally fine" until approximately mile 6 of any hike, at which point it develops opinions. Will refuse trekking poles for two days and use them for the rest of the trip. A man who deserves six hot springs and got six, the universe correcting itself.</p>
   </div>
   <div class="char">
     <h4>Natalie</h4>
@@ -390,7 +402,7 @@ footer{
   </div>
   <div class="char">
     <h4>Ben</h4>
-    <p>First-time parent navigating the chaos of a one-year-old while his wife is throwing stretch ideas at him. Loves beer breaks and nerd games more than sleep, a philosophical stance that has not been tested by Jane until now. Will absolutely find a brewery between hikes. Traveling with an actual tiny human who has the family's work ethic: zero tolerance for nonsense, maximum opinions about everything.</p>
+    <p>First-time parent navigating the chaos of a one-year-old while his wife is throwing stretch ideas at him. Loves beer breaks and nerd games more than sleep, a philosophical stance that has not been tested by Jane until now. Will absolutely find a brewery between hikes. Travelling with an actual tiny human who has the family's work ethic: zero tolerance for nonsense, maximum opinions about everything.</p>
   </div>
   <div class="char">
     <h4>Jane</h4>
@@ -509,40 +521,43 @@ footer{
       <p>Groceries at Park West Mall in Hinton — five minutes from the cabin, far better than Jasper. Folding Mountain Brewery by the gate for dinner.</p>
     </div>
 
-    <div class="day park">
+    <div class="day park big">
       <div class="dot"></div>
       <div class="dayhead"><span class="dt">Mon · Sept 7</span></div>
-      <h3>Maligne Valley</h3>
+      <h3>Maligne Valley · Big Hike Day</h3>
       <div class="gauge"><div class="bar" style="width:18%"></div><span class="lbl">~150 miles round trip · leave 7:00am</span></div>
       <p>About 1hr 50min each way. Wildlife road — bighorn sheep guaranteed, moose at Medicine Lake.</p>
       <ul>
         <li><strong>Medicine Lake</strong> — the disappearing lake, drains into a cave system</li>
-        <li><strong>Maligne Lake cruise to Spirit Island</strong> — 1h30, book mid-morning slot</li>
         <li><strong>Mary Schäffer Loop</strong> — 2 miles, flat lakeshore</li>
-        <li><strong>Optional:</strong> Bald Hills fire road — 4.6 miles, 1,000 ft, old road grade, forgiving footing</li>
+        <li><strong>HIKE: Bald Hills fire road</strong> — 4.6 miles, 1,000 ft, old road grade, forgiving footing, real payoff. K-G paced. This is your mountain hike of the Jasper week.</li>
       </ul>
     </div>
 
     <div class="day park">
       <div class="dot"></div>
       <div class="dayhead"><span class="dt">Tue · Sept 8</span></div>
-      <h3>Miette Hot Springs</h3>
-      <div class="gauge"><div class="bar" style="width:7%"></div><span class="lbl">~60 miles round trip</span></div>
-      <p>~45 minutes from the cabin. K-G's first of five soaks.</p>
+      <h3>Talbot Lake Fishing Day</h3>
+      <div class="gauge"><div class="bar" style="width:8%"></div><span class="lbl">Full day rowboat rental · ~45 min from cabin</span></div>
+      <p><strong>Self-guided rowboat rental, Curries Guiding.</strong> Crystal-clear water at 4.5 ft deep — see the bottom, weeds, fish. Stable boat, easy to handle. Bring your cooler, booze, snacks, fishing gear.</p>
       <ul>
-        <li><strong>Pocahontas ghost town</strong> — flat loop through early-1900s coal settlement</li>
-        <li><strong>Miette Hot Springs</strong> — hottest in the Canadian Rockies, 129°F source, pools at 104°F. ~$19.75 adult. Call 1-800-767-1611 for hours.</li>
+        <li><strong>Boat rental:</strong> 12 hours ~$163 (pickup at Astoria Hotel in Jasper)</li>
+        <li><strong>Optional electric motor:</strong> $50 (saves your arms)</li>
+        <li><strong>What's included:</strong> Oars, PFDs, rope, safety whistle, equipment orientation</li>
+        <li><strong>Bring:</strong> Parks Canada fishing licence (buy at Astoria, ~$20), your own fishing gear</li>
+        <li><strong>Max 4 people per boat</strong> — you could rent two boats for the whole group</li>
       </ul>
+      <p>Quiet lake, no tour boats, no crowds. Spectacular views and solid fishing. This is your day off from hiking.</p>
     </div>
 
-    <div class="day park">
+    <div class="day park big">
       <div class="dot"></div>
       <div class="dayhead"><span class="dt">Wed · Sept 9</span></div>
-      <h3>Mount Robson</h3>
+      <h3>Mount Robson, BC · Big Hike Day</h3>
       <div class="gauge"><div class="bar" style="width:19%"></div><span class="lbl">~155 miles round trip</span></div>
       <p>West into BC. Provincial park, free entry. <strong>BC is Pacific time</strong> — gain an hour going, lose it back.</p>
       <ul>
-        <li><strong>Kinney Lake</strong> — 5.4 miles round trip, ~1,410 ft gain. Wide, near-flat old road to a turquoise glacial lake. <strong>The gentlest five miles in the Rockies</strong> — no steep pitches anywhere. Right in your range.</li>
+        <li><strong>HIKE: Kinney Lake</strong> — 5.4 miles round trip, ~1,410 ft gain. Wide, near-flat old road to a turquoise glacial lake. <strong>The gentlest five miles in the Rockies</strong> — no steep pitches anywhere. Right in your range.</li>
         <li><strong>Overlander Falls</strong> — 1 mile round trip add-on</li>
       </ul>
       <p>Robson is 12,972 ft and hides in cloud two days out of three. When it's out, most imposing mountain view on the continent.</p>
@@ -551,13 +566,14 @@ footer{
     <div class="day park">
       <div class="dot"></div>
       <div class="dayhead"><span class="dt">Thu · Sept 10</span></div>
-      <h3>Five Lakes & Pack</h3>
+      <h3>Recovery Day · Hot Springs & Pack</h3>
       <div class="gauge"><div class="bar" style="width:11%"></div><span class="lbl">~90 miles round trip</span></div>
       <ul>
-        <li><strong>Valley of the Five Lakes</strong> — 2.8 miles loop, minimal gain. Rebuilt and rerouted for 2026.</li>
-        <li><strong>Horseshoe Lake</strong> — 10 minutes, flat</li>
+        <li><strong>Pocahontas ghost town</strong> — flat, easy interpretive loop through early-1900s coal settlement</li>
+        <li><strong>Miette Hot Springs</strong> — hottest in the Canadian Rockies, 129°F source, pools at 104°F. ~$19.75 adult. Call 1-800-767-1611 for hours. <strong>K-G's reward for two big hike days.</strong></li>
+        <li><strong>Optional Sulphur Skyline</strong> — 8 km / 5 mi, 700m / 2,300 ft, relentlessly steep. Only if anyone wants to punish themselves.</li>
       </ul>
-      <p>Fuel in Hinton, pack, <strong>leave the cabin park pass in the Welcome Guest Binder</strong> — $150 charge if it goes missing.</p>
+      <p>Soak, relax, pack, fuel in Hinton, <strong>leave the cabin park pass in the Welcome Guest Binder</strong> — $150 charge if it goes missing.</p>
     </div>
 
   </div>
@@ -701,7 +717,7 @@ footer{
       <h3>Calgary → Moose Jaw</h3>
       <div class="gauge"><div class="bar" style="width:50%"></div><span class="lbl">430 miles · 7h</span></div>
       <p>Checkout 10:00am. Drop at YYC, Ben and Kelly return their rental, K-G and Natalie point the truck east.</p>
-      <div class="note"><b>Moose Jaw is where K-G finally gets his mineral soak.</b> Temple Gardens Hotel & Spa, real geothermal pool, right off the Trans-Canada. He earned it driving 850 miles on the 4th.</div>
+      <div class="note"><b>Moose Jaw is where K-G finally gets his mineral soak.</b> Temple Gardens Hotel & Spa, real geothermal pool, right off the Trans-Canada. He earned it driving 850 miles on the 4th and hiking two big days.</div>
     </div>
 
     <div class="day transit big">
@@ -746,9 +762,9 @@ footer{
 
 <h2>The K-G foot protocol</h2>
 
-<p>Miette twice, Banff Upper Hot Springs, a hot tub at the condo every night, and Moose Jaw on the way home. Five-plus soaks, and Friday the 4th is the one day he'll actually need them.</p>
+<p>Miette once, Banff Upper Hot Springs, Moose Jaw mineral soak, a hot tub at the condo most nights, and one more soak — six total. Friday the 4th is the one day he'll actually need them the most.</p>
 
-<p>Every day has a gentle option running parallel to the hard one — Consolation Lakes instead of Larch Valley, the lakeshore instead of Lake Agnes, the SkyTram boardwalk instead of the summit. Nobody sits out and nobody waits around.</p>
+<p>Two real hiking days (Maligne Bald Hills + Mount Robson Kinney Lake) with a fishing break in between. Gentle options on every other day. Nobody sits out and nobody waits around.</p>
 
 <p>Bring trekking poles. They take real load off one foot on descents, which is where the damage happens. He'll refuse them for two days and use them for the rest of the trip.</p>
 
@@ -770,6 +786,21 @@ footer{
 </div>
 
 <script>
+// Auto-populate timestamp
+document.addEventListener('DOMContentLoaded', () => {
+  const now = new Date();
+  const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const month = monthNames[now.getMonth()];
+  const day = now.getDate();
+  const year = now.getFullYear();
+  const hours = String(now.getHours()).padStart(2,'0');
+  const mins = String(now.getMinutes()).padStart(2,'0');
+  
+  const timestamp = `Updated ${month} ${day}, ${year} · ${hours}:${mins}`;
+  document.getElementById('timestamp').textContent = timestamp;
+});
+
+// Tab navigation
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const tabName = btn.dataset.tab;
