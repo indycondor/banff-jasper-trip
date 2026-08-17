@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>Jasper &amp; Banff — September 2026</title>
 <style>
 :root{
@@ -24,20 +25,44 @@
   --body:Charter,"Bitstream Charter","Iowan Old Style",Georgia,serif;
   --mono:"DejaVu Sans Mono",ui-monospace,Menlo,monospace;
 }
+
+@media (prefers-color-scheme: dark) {
+  :root{
+    --paper:#0F1419;
+    --card:#1A1F27;
+    --ink:#E8EFF3;
+    --ink-2:#B8C4CC;
+    --ink-3:#7A8896;
+    --rail:#3A4452;
+    --hair:#252D37;
+    --melt:#4DB8CC;
+    --melt-d:#7FD0E0;
+    --melt-w:#0D3D47;
+    --larch:#D4B896;
+    --larch-w:#2D2410;
+    --oxide:#FF9999;
+    --oxide-w:#3D1515;
+  }
+}
+
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{
   margin:0;background:var(--paper);color:var(--ink);
   font-family:var(--body);font-size:16.5px;line-height:1.58;
-  -webkit-font-smoothing:antialiased;
+  -webkit-font-smoothing:antialiased;transition:background-color 200ms,color 200ms;
 }
 .wrap{max-width:860px;margin:0 auto;padding:0 22px 90px}
+
+a{color:var(--melt);text-decoration:none;border-bottom:1px solid var(--melt)}
+a:hover{opacity:.75}
 
 /* ---------- tabs ---------- */
 .tabs-nav{
   position:sticky;top:0;z-index:100;
   background:var(--ink);padding:0;margin:0 -22px;overflow-x:auto;overflow-y:hidden;
   -webkit-overflow-scrolling:touch;border-bottom:3px solid var(--melt);
+  transition:background-color 200ms;
 }
 .tabs-nav-inner{
   display:flex;gap:0;padding:0 22px;min-width:fit-content;
@@ -48,8 +73,17 @@ body{
   background:var(--ink);border:none;cursor:pointer;white-space:nowrap;
   border-bottom:3px solid transparent;transition:all 140ms ease;
 }
+@media (prefers-color-scheme: dark) {
+  .tab-btn{color:#6B7D89}
+}
 .tab-btn:hover{color:#D6DEE1}
+@media (prefers-color-scheme: dark) {
+  .tab-btn:hover{color:#B8C4CC}
+}
 .tab-btn.active{color:#fff;border-bottom-color:var(--melt)}
+@media (prefers-color-scheme: dark) {
+  .tab-btn.active{color:var(--ink)}
+}
 .tab-content{display:none}
 .tab-content.active{display:block}
 
@@ -62,15 +96,17 @@ body{
 .mono{font-family:var(--mono);font-size:12.5px;letter-spacing:-.01em}
 
 /* ---------- masthead ---------- */
-header{padding:56px 0 30px;border-bottom:2px solid var(--ink);position:relative}
+header{padding:56px 0 30px;border-bottom:2px solid var(--ink);position:relative;transition:border-color 200ms}
 .kicker{
   font-family:var(--disp);text-transform:uppercase;letter-spacing:.3em;
   font-size:11px;font-weight:700;color:var(--ink-3);margin-bottom:20px;
+  transition:color 200ms;
 }
 #timestamp{
   position:absolute;top:56px;right:0;font-family:var(--disp);
   text-transform:uppercase;letter-spacing:.12em;font-size:10.5px;
   font-weight:700;color:var(--ink-3);white-space:nowrap;
+  transition:color 200ms;
 }
 h1{
   font-family:var(--disp);font-weight:700;
@@ -81,6 +117,7 @@ h1 .amp{color:var(--melt);font-weight:400}
 .dates{
   font-family:var(--disp);text-transform:uppercase;letter-spacing:.09em;
   font-size:16px;font-weight:700;color:var(--ink-2);margin-bottom:26px;
+  transition:color 200ms;
 }
 .routeline{
   display:flex;flex-wrap:wrap;align-items:center;gap:9px;
@@ -91,12 +128,14 @@ h1 .amp{color:var(--melt);font-weight:400}
 .node{
   border:1.5px solid var(--ink);padding:4px 10px 3px;
   background:var(--card);
+  transition:all 200ms;
 }
 .node.hi{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 
-.facts{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid var(--hair)}
+.facts{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid var(--hair);transition:border-color 200ms}
 .fact{
   flex:1 1 130px;padding:14px 16px 12px;border-right:1px solid var(--hair);
+  transition:border-color 200ms;
 }
 .fact:last-child{border-right:0}
 .fact b{
@@ -106,6 +145,7 @@ h1 .amp{color:var(--melt);font-weight:400}
 .fact span{
   display:block;font-family:var(--disp);text-transform:uppercase;
   letter-spacing:.12em;font-size:10px;font-weight:700;color:var(--ink-3);margin-top:6px;
+  transition:color 200ms;
 }
 
 /* ---------- section headers ---------- */
@@ -113,18 +153,21 @@ h2{
   font-family:var(--disp);text-transform:uppercase;font-weight:700;
   font-size:13px;letter-spacing:.2em;color:var(--ink);
   margin:54px 0 18px;padding-bottom:9px;border-bottom:1px solid var(--ink);
+  transition:all 200ms;
 }
 
 /* ---------- advisories ---------- */
 .adv{
   background:var(--card);border-left:4px solid var(--oxide);
   padding:16px 20px 17px;margin-bottom:12px;
+  transition:background-color 200ms;
 }
 .adv.gold{border-left-color:var(--larch)}
 .adv.teal{border-left-color:var(--melt)}
 .adv h3{
   font-family:var(--disp);text-transform:uppercase;letter-spacing:.1em;
   font-size:12.5px;font-weight:700;margin:0 0 7px;color:var(--oxide);
+  transition:color 200ms;
 }
 .adv.gold h3{color:var(--larch)}
 .adv.teal h3{color:var(--melt-d)}
@@ -140,8 +183,9 @@ li::marker{color:var(--melt)}
   font-family:var(--disp);text-transform:uppercase;letter-spacing:.1em;
   font-size:10.5px;font-weight:700;color:var(--ink-3);
   text-align:left;padding:0 12px 7px 0;border-bottom:1.5px solid var(--ink);
+  transition:all 200ms;
 }
-.tbl td{padding:9px 12px 9px 0;border-bottom:1px solid var(--hair);vertical-align:top}
+.tbl td{padding:9px 12px 9px 0;border-bottom:1px solid var(--hair);vertical-align:top;transition:border-color 200ms}
 .tbl td:last-child,.tbl th:last-child{padding-right:0}
 .tbl .num{font-family:var(--mono);font-size:13px;white-space:nowrap}
 
@@ -151,20 +195,24 @@ li::marker{color:var(--melt)}
   font-family:var(--disp);text-transform:uppercase;letter-spacing:.22em;
   font-size:11px;font-weight:700;color:var(--paper);
   background:var(--ink);display:inline-block;padding:6px 13px 5px;
+  transition:all 200ms;
 }
 .days{position:relative;margin-top:0;padding-left:0}
 .day{
   position:relative;padding:26px 0 24px 46px;border-bottom:1px solid var(--hair);
   break-inside:avoid;page-break-inside:avoid;
+  transition:border-color 200ms;
 }
 .day:before{ /* rail */
   content:"";position:absolute;left:11px;top:0;bottom:0;width:2px;background:var(--rail);
+  transition:background-color 200ms;
 }
 .day:first-child:before{top:26px}
 .day:last-child:before{bottom:auto;height:26px}
 .day .dot{
   position:absolute;left:4px;top:24px;width:16px;height:16px;border-radius:50%;
   background:var(--paper);border:2.5px solid var(--melt);z-index:2;
+  transition:all 200ms;
 }
 .day.transit .dot{background:var(--melt);border-color:var(--melt)}
 .day.big .dot{
@@ -186,39 +234,51 @@ li::marker{color:var(--melt)}
 
 /* mileage bar */
 .gauge{display:flex;align-items:center;gap:11px;margin:0 0 13px}
-.bar{flex:0 0 auto;height:7px;background:var(--melt);min-width:2px}
+.bar{flex:0 0 auto;height:7px;background:var(--melt);min-width:2px;transition:background-color 200ms}
 .day.park .bar{background:var(--rail)}
 .gauge .lbl{
   font-family:var(--mono);font-size:11.5px;color:var(--ink-3);white-space:nowrap;
+  transition:color 200ms;
 }
 .route{
   font-family:var(--disp);text-transform:uppercase;letter-spacing:.05em;
   font-size:12.5px;font-weight:700;color:var(--ink-2);
   margin:0 0 12px;line-height:1.45;
+  transition:color 200ms;
 }
 
 /* inline callouts */
 .note{
   background:var(--melt-w);padding:12px 15px;margin:13px 0;
   font-size:14.5px;line-height:1.5;border-left:3px solid var(--melt);
+  transition:all 200ms;
 }
 .note.gold{background:var(--larch-w);border-left-color:var(--larch)}
 .note.red{background:var(--oxide-w);border-left-color:var(--oxide)}
 .note b{font-family:var(--body)}
 
 .stops{width:100%;border-collapse:collapse;margin:12px 0;font-size:14.5px}
-.stops td{padding:7px 10px 7px 0;border-bottom:1px solid var(--hair)}
+.stops td{padding:7px 10px 7px 0;border-bottom:1px solid var(--hair);transition:border-color 200ms}
 .stops td:last-child{
   text-align:right;padding-right:0;font-family:var(--mono);font-size:11.5px;
-  color:var(--ink-3);white-space:nowrap;
+  color:var(--ink-3);white-space:nowrap;transition:color 200ms;
 }
 
 /* ---------- rockford dossier ---------- */
 .dossier{
   background:var(--ink);color:#D6DEE1;padding:30px 26px 26px;margin:26px 0;
   break-inside:avoid;page-break-inside:avoid;
+  transition:all 200ms;
+}
+@media (prefers-color-scheme: dark) {
+  .dossier{
+    background:#1A1F27;color:#B8C4CC;
+  }
 }
 .dossier .eyebrow{color:#7FB4B8}
+@media (prefers-color-scheme: dark) {
+  .dossier .eyebrow{color:#6B9BA8}
+}
 .dossier h3{
   font-family:var(--disp);text-transform:uppercase;font-weight:700;
   font-size:clamp(30px,7vw,44px);line-height:.94;margin:11px 0 4px;color:#fff;
@@ -227,28 +287,47 @@ li::marker{color:var(--melt)}
   font-family:var(--disp);text-transform:uppercase;letter-spacing:.14em;
   font-size:11px;font-weight:700;color:#8FA3AA;margin-bottom:20px;
 }
+@media (prefers-color-scheme: dark) {
+  .dossier .sub{color:#6B7D89}
+}
 .dossier p{font-size:15px;line-height:1.55;color:#C9D4D8;margin:11px 0}
+@media (prefers-color-scheme: dark) {
+  .dossier p{color:#A8B8C4}
+}
 .dossier strong{color:#fff}
 .rap{list-style:none;margin:18px 0;padding:0}
 .rap li{
   display:flex;gap:14px;padding:9px 0;border-top:1px solid #2C3D45;margin:0;
   font-size:14.5px;line-height:1.45;color:#C9D4D8;
+  transition:border-color 200ms;
+}
+@media (prefers-color-scheme: dark) {
+  .rap li{border-top-color:#3A4452;color:#A8B8C4}
 }
 .rap li:last-child{border-bottom:1px solid #2C3D45}
+@media (prefers-color-scheme: dark) {
+  .rap li:last-child{border-bottom-color:#3A4452}
+}
 .rap .yr{
   font-family:var(--mono);font-size:12.5px;color:#7FB4B8;
   flex:0 0 44px;padding-top:2px;
+}
+@media (prefers-color-scheme: dark) {
+  .rap .yr{color:#6B9BA8}
 }
 .dossier .kicker2{
   font-family:var(--disp);text-transform:uppercase;letter-spacing:.1em;
   font-size:12px;font-weight:700;color:#fff;margin-top:20px;
   border-top:2px solid #7FB4B8;padding-top:14px;
 }
+@media (prefers-color-scheme: dark) {
+  .dossier .kicker2{border-top-color:#6B9BA8}
+}
 
 /* character section */
 .chars{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:18px 0}
-.char{background:var(--card);padding:20px;border-left:4px solid var(--melt)}
-.char h4{font-family:var(--disp);text-transform:uppercase;letter-spacing:.12em;font-size:13px;font-weight:700;margin:0 0 8px;color:var(--ink)}
+.char{background:var(--card);padding:20px;border-left:4px solid var(--melt);transition:background-color 200ms}
+.char h4{font-family:var(--disp);text-transform:uppercase;letter-spacing:.12em;font-size:13px;font-weight:700;margin:0 0 8px;color:var(--ink);transition:color 200ms}
 .char p{margin:0;font-size:14.5px;line-height:1.5}
 .char.hero{border-left-color:#2DB662}
 .char.hero h4{color:#2DB662}
@@ -259,6 +338,7 @@ footer{
   font-family:var(--disp);text-transform:uppercase;letter-spacing:.13em;
   font-size:10.5px;font-weight:700;color:var(--ink-3);
   display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  transition:all 200ms;
 }
 
 /* responsive */
@@ -334,7 +414,7 @@ footer{
 
 <div class="adv gold">
   <h3>Book Talbot Lake rowboat · Tue Sept 8</h3>
-  <p><strong>Rowboat rental on Talbot Lake for a full fishing day.</strong> Reserve through FareHarbor (Curries Guiding). 12-hour rental ~$163. Optional electric motor $50. Crystal-clear water, quiet lake, perfect for a middle-trip break day.</p>
+  <p><strong><a href="https://fareharbor.com/embeds/book/curries-guiding/items/392590/?full-screen=yes" target="_blank">Rowboat rental on Talbot Lake</a> for a full fishing day.</strong> Reserve through FareHarbor (Curries Guiding). 12-hour rental ~$163. Optional electric motor $50. Crystal-clear water, quiet lake, perfect for a middle-trip break day.</p>
 </div>
 
 <h2>Book this week</h2>
@@ -344,36 +424,22 @@ footer{
   <tr><td><strong>Hinton hotel, Sat Sept 5</strong></td><td class="num">Today</td></tr>
   <tr><td>Jamestown ND (Thu 3) & Calgary or Cochrane (Fri 4)</td><td class="num">This week</td></tr>
   <tr><td><strong>Talbot Lake rowboat rental, Tue Sept 8</strong></td><td class="num">Now</td></tr>
-  <tr><td><strong>Moraine Lake shuttle</strong> — set an alarm. One booking holds 10 seats. Pick Moraine Lake as first destination; the free Lake Connector runs you to Lake Louise after.</td><td class="num">8:00am MDT<br>Thu Sept 10</td></tr>
-  <tr><td>Moraine Lake Bus Company — insurance</td><td class="num">Now</td></tr>
-  <tr><td>Banff Gondola & Jasper SkyTram</td><td class="num">Now</td></tr>
+  <tr><td><strong><a href="https://www.moraine.lake/" target="_blank">Moraine Lake shuttle</a></strong> — set an alarm. One booking holds 10 seats. Pick Moraine Lake as first destination; the free Lake Connector runs you to Lake Louise after.</td><td class="num">8:00am MDT<br>Thu Sept 10</td></tr>
+  <tr><td><a href="https://moraine-lake-bus-company.business.site/" target="_blank">Moraine Lake Bus Company</a> — insurance</td><td class="num">Now</td></tr>
+  <tr><td><a href="https://www.banffnordegg.com/attractions/banff-gondola" target="_blank">Banff Gondola</a> & <a href="https://www.jasperskyram.com/" target="_blank">Jasper SkyTram</a></td><td class="num">Now</td></tr>
 </table>
 
 <h2>Park passes</h2>
 
 <table class="tbl">
   <tr><th>When</th><th>What you need</th><th>Cost</th></tr>
-  <tr><td class="num">Sept 5–7</td><td>Nothing — Canada Strong Pass</td><td class="num">$0</td></tr>
+  <tr><td class="num">Sept 5–7</td><td><a href="https://www.pc.gc.ca/en/voyager-travel/admission" target="_blank">Canada Strong Pass</a></td><td class="num">$0</td></tr>
   <tr><td class="num">Sept 8–11</td><td>Cabin's included pass</td><td class="num">$0</td></tr>
   <tr><td class="num">Sept 12–15</td><td>Banff day passes per vehicle</td><td class="num">$24.50<br>per day</td></tr>
-  <tr><td class="num">Sept 16</td><td><strong>Kananaskis Conservation Pass</strong> — buy online by 11:59pm</td><td class="num">$15<br>per vehicle</td></tr>
+  <tr><td class="num">Sept 16</td><td><strong><a href="https://shop.albertaparks.ca/" target="_blank">Kananaskis Conservation Pass</a></strong> — buy online by 11:59pm</td><td class="num">$15<br>per vehicle</td></tr>
 </table>
 
-<div class="note"><b>Skip the Discovery Pass.</b> Day passes win on every vehicle.</div>
-
-<h2>Roster</h2>
-
-<table class="tbl">
-  <tr><th>Who</th><th>In country</th><th>Wheels</th></tr>
-  <tr><td>You</td><td class="num">Sept 3 – 15</td><td>Truck out, Doc's car to YYC</td></tr>
-  <tr><td>K-G <em>(the elder statesman)</em></td><td class="num">Sept 3 – 19</td><td>The truck</td></tr>
-  <tr><td>Natalie</td><td class="num">Sept 3 – 19</td><td>The truck</td></tr>
-  <tr><td>Ben, Kelly, Jane <em>(age 1)</em></td><td class="num">Sept 11 – 17</td><td>Their car</td></tr>
-  <tr><td>Jana</td><td class="num">Sept 11 – 17</td><td>Passenger</td></tr>
-  <tr><td>Doc</td><td class="num">Sept 11 – 15</td><td>His car</td></tr>
-</table>
-
-<h2>Who you're travelling with</h2>
+<h2>The characters</h2>
 
 <div class="chars">
   <div class="char hero">
@@ -383,30 +449,6 @@ footer{
   <div class="char hero">
     <h4>Jana</h4>
     <p>Everything good about people who've actually had to work things out. Smart, kind, asks good questions, doesn't complain. The kind of person you remember fondly for years after a trip because they made it better by being there. An actual good person, extremely unfair to the rest of the group.</p>
-  </div>
-  <div class="char">
-    <h4>You</h4>
-    <p>Organized enough to plan a 4,000-mile road trip to two national parks in September. Disorganized enough to need to plan a 4,000-mile road trip at the last minute. A study in contradiction who somehow makes it work through sheer spite and caffeine.</p>
-  </div>
-  <div class="char">
-    <h4>K-G</h4>
-    <p>The elder statesman whose foot is "totally fine" and will remain "totally fine" until approximately mile 6 of any hike, at which point it develops opinions. Will refuse trekking poles for two days and use them for the rest of the trip. A man who deserves six hot springs and got six, the universe correcting itself.</p>
-  </div>
-  <div class="char">
-    <h4>Natalie</h4>
-    <p>The one who actually wants to do the Icefields Parkway as an experience rather than a transfer between places. The voice of reason that nobody asked for but everyone needs. Probably the only one who will remember to bring sunscreen.</p>
-  </div>
-  <div class="char">
-    <h4>Kelly</h4>
-    <p>Generally has everything together — the kind of person who packs the right clothes and knows where the sunscreen is. Except for the stretch crazy ideas that come out of nowhere. Suggests things like "what if we drove to Jasper the long way" or "let's hike an extra five miles just because." Ben has learned to recognize when the look crosses her face. Jane has learned to exploit it for tactical advantages.</p>
-  </div>
-  <div class="char">
-    <h4>Ben</h4>
-    <p>First-time parent navigating the chaos of a one-year-old while his wife is throwing stretch ideas at him. Loves beer breaks and nerd games more than sleep, a philosophical stance that has not been tested by Jane until now. Will absolutely find a brewery between hikes. Travelling with an actual tiny human who has the family's work ethic: zero tolerance for nonsense, maximum opinions about everything.</p>
-  </div>
-  <div class="char">
-    <h4>Jane</h4>
-    <p>Age one. Actual boss of the Ben and Kelly household. Rules with an iron fist disguised as a baby face. Does not negotiate. Will charm everyone on the trail for exactly 23 minutes, then inform you that nap time is now and your hiking plans are a suggestion she has rejected. Ben and Kelly survive at her pleasure. She is the real trip leader and does not know it yet.</p>
   </div>
 </div>
 
@@ -426,7 +468,7 @@ footer{
       <div class="gauge"><div class="bar" style="width:92%"></div><span class="lbl">790 miles · 11h50</span></div>
       <p class="route">IL-59 N → I-88 W → I-39 N → I-90 W → I-94 W → Fargo → Jamestown</p>
       <p><strong>Leave 6:00am.</strong> You head west from minute one; the closest you get to the Loop is 45 miles and shrinking behind you.</p>
-      <p><strong>Stops:</strong> Madison (~3h) · <strong>Norske Nook in Osseo, WI</strong> for pie, mandatory (~4h45) · Minneapolis mid-afternoon beats rush hour, take I-494/I-694 around · dinner in Fargo around 5:30pm, then the last easy 95 miles.</p>
+      <p><strong>Stops:</strong> Madison (~3h) · <strong><a href="https://www.norskenook.com/" target="_blank">Norske Nook in Osseo, WI</a></strong> for pie, mandatory (~4h45) · Minneapolis mid-afternoon beats rush hour, take I-494/I-694 around · dinner in Fargo around 5:30pm, then the last easy 95 miles.</p>
       <div class="note gold"><b>Tolls.</b> I-88 and I-90 in Illinois are Illinois Tollway. No transponder means pay online within 14 days or fees compound.</div>
     </div>
 
@@ -494,13 +536,13 @@ footer{
       <div class="note"><b>Free entry today.</b> The Canada Strong Pass covers park admission through Sept 7.</div>
       <div class="note gold"><b>Fuel in Lake Louise.</b> No gas for 143 miles after. Download offline maps; no cell service on the parkway.</div>
       <table class="stops">
-        <tr><td>Bow Lake & Num-Ti-Jah Lodge</td><td>30 min</td></tr>
-        <tr><td>Peyto Lake — 15 min walk</td><td>30 min</td></tr>
-        <tr><td>Mistaya Canyon</td><td>20 min</td></tr>
+        <tr><td><a href="https://www.pc.gc.ca/en/lhn-nhs/ab/bow-lake" target="_blank">Bow Lake & Num-Ti-Jah Lodge</a></td><td>30 min</td></tr>
+        <tr><td><a href="https://www.pc.gc.ca/en/pn-np/ab/banff-lake-louise/visit/peyto-lake" target="_blank">Peyto Lake</a> — 15 min walk</td><td>30 min</td></tr>
+        <tr><td><a href="https://www.pc.gc.ca/en/pn-np/ab/banff-lake-louise/visit/mistaya-canyon" target="_blank">Mistaya Canyon</a></td><td>20 min</td></tr>
         <tr><td>Saskatchewan River Crossing</td><td>30 min</td></tr>
-        <tr><td>Columbia Icefield — walk to glacier toe, free</td><td>45 min</td></tr>
-        <tr><td>Sunwapta Falls</td><td>20 min</td></tr>
-        <tr><td>Athabasca Falls</td><td>30 min</td></tr>
+        <tr><td><a href="https://www.pc.gc.ca/en/pn-np/ab/banff-lake-louise/visit/columbia-icefield-area" target="_blank">Columbia Icefield</a> — walk to glacier toe, free</td><td>45 min</td></tr>
+        <tr><td><a href="https://www.pc.gc.ca/en/pn-np/ab/banff-lake-louise/visit/sunwapta-falls" target="_blank">Sunwapta Falls</a></td><td>20 min</td></tr>
+        <tr><td><a href="https://www.pc.gc.ca/en/pn-np/ab/banff-lake-louise/visit/athabasca-falls" target="_blank">Athabasca Falls</a></td><td>30 min</td></tr>
       </table>
       <div class="note red"><b>At the glacier, stay behind every rope.</b> People die in crevasses here.</div>
       <p>Jasper ~5:00pm, dinner in town, Hinton by 6:30pm.</p>
@@ -513,12 +555,12 @@ footer{
       <div class="gauge"><div class="bar" style="width:12%"></div><span class="lbl">~100 miles round trip</span></div>
       <p>Hotel checkout, then a whole day in the park. Cabin check-in is 4pm. One loop — don't yo-yo.</p>
       <ul>
-        <li><strong>Old Fort Point</strong> — 2.2 miles loop, 1,400 ft</li>
-        <li><strong>Jasper SkyTram</strong> to 7,470 ft. K-G walks the flat boardwalk at the top and stops — 90% of the view for 5% of the ankle.</li>
+        <li><strong><a href="https://www.pc.gc.ca/en/pn-np/ab/jasper/visit/old-fort-point" target="_blank">Old Fort Point</a></strong> — 2.2 miles loop, 1,400 ft</li>
+        <li><strong><a href="https://www.jasperskyram.com/" target="_blank">Jasper SkyTram</a></strong> to 7,470 ft. K-G walks the flat boardwalk at the top and stops — 90% of the view for 5% of the ankle.</li>
         <li>Jasper townsite</li>
-        <li><strong>Pyramid Island</strong> — best sunset in Jasper for almost no effort</li>
+        <li><strong><a href="https://www.pc.gc.ca/en/pn-np/ab/jasper/visit/pyramid-lake" target="_blank">Pyramid Island</a></strong> — best sunset in Jasper for almost no effort</li>
       </ul>
-      <p>Groceries at Park West Mall in Hinton — five minutes from the cabin, far better than Jasper. Folding Mountain Brewery by the gate for dinner.</p>
+      <p>Groceries at <a href="https://www.parkwestmall.com/" target="_blank">Park West Mall</a> in Hinton — five minutes from the cabin, far better than Jasper. <a href="https://foldingmountainbrewery.com/" target="_blank">Folding Mountain Brewery</a> by the gate for dinner.</p>
     </div>
 
     <div class="day park big">
@@ -528,9 +570,9 @@ footer{
       <div class="gauge"><div class="bar" style="width:18%"></div><span class="lbl">~150 miles round trip · leave 7:00am</span></div>
       <p>About 1hr 50min each way. Wildlife road — bighorn sheep guaranteed, moose at Medicine Lake.</p>
       <ul>
-        <li><strong>Medicine Lake</strong> — the disappearing lake, drains into a cave system</li>
-        <li><strong>Mary Schäffer Loop</strong> — 2 miles, flat lakeshore</li>
-        <li><strong>HIKE: Bald Hills fire road</strong> — 4.6 miles, 1,000 ft, old road grade, forgiving footing, real payoff. K-G paced. This is your mountain hike of the Jasper week.</li>
+        <li><strong><a href="https://www.pc.gc.ca/en/pn-np/ab/jasper/visit/medicine-lake" target="_blank">Medicine Lake</a></strong> — the disappearing lake, drains into a cave system</li>
+        <li><strong><a href="https://www.pc.gc.ca/en/pn-np/ab/jasper/visit/mary-schaffer-loop" target="_blank">Mary Schäffer Loop</a></strong> — 2 miles, flat lakeshore</li>
+        <li><strong>HIKE: <a href="https://www.pc.gc.ca/en/pn-np/ab/jasper/visit/bald-hills" target="_blank">Bald Hills fire road</a></strong> — 4.6 miles, 1,000 ft, old road grade, forgiving footing, real payoff. K-G paced. This is your mountain hike of the Jasper week.</li>
       </ul>
     </div>
 
@@ -539,9 +581,9 @@ footer{
       <div class="dayhead"><span class="dt">Tue · Sept 8</span></div>
       <h3>Talbot Lake Fishing Day</h3>
       <div class="gauge"><div class="bar" style="width:8%"></div><span class="lbl">Full day rowboat rental · ~45 min from cabin</span></div>
-      <p><strong>Self-guided rowboat rental, Curries Guiding.</strong> Crystal-clear water at 4.5 ft deep — see the bottom, weeds, fish. Stable boat, easy to handle. Bring your cooler, booze, snacks, fishing gear.</p>
+      <p><strong><a href="https://fareharbor.com/embeds/book/curries-guiding/items/392590/?full-screen=yes" target="_blank">Self-guided rowboat rental, Curries Guiding.</a></strong> Crystal-clear water at 4.5 ft deep — see the bottom, weeds, fish. Stable boat, easy to handle. Bring your cooler, booze, snacks, fishing gear.</p>
       <ul>
-        <li><strong>Boat rental:</strong> 12 hours ~$163 (pickup at Astoria Hotel in Jasper)</li>
+        <li><strong>Boat rental:</strong> 12 hours ~$163 (pickup at <a href="https://www.astoriahotel.com/" target="_blank">Astoria Hotel</a> in Jasper)</li>
         <li><strong>Optional electric motor:</strong> $50 (saves your arms)</li>
         <li><strong>What's included:</strong> Oars, PFDs, rope, safety whistle, equipment orientation</li>
         <li><strong>Bring:</strong> Parks Canada fishing licence (buy at Astoria, ~$20), your own fishing gear</li>
@@ -557,8 +599,8 @@ footer{
       <div class="gauge"><div class="bar" style="width:19%"></div><span class="lbl">~155 miles round trip</span></div>
       <p>West into BC. Provincial park, free entry. <strong>BC is Pacific time</strong> — gain an hour going, lose it back.</p>
       <ul>
-        <li><strong>HIKE: Kinney Lake</strong> — 5.4 miles round trip, ~1,410 ft gain. Wide, near-flat old road to a turquoise glacial lake. <strong>The gentlest five miles in the Rockies</strong> — no steep pitches anywhere. Right in your range.</li>
-        <li><strong>Overlander Falls</strong> — 1 mile round trip add-on</li>
+        <li><strong>HIKE: <a href="https://www.pc.gc.ca/en/pn-np/bc/mount-robson/visit/kinney-lake" target="_blank">Kinney Lake</a></strong> — 5.4 miles round trip, ~1,410 ft gain. Wide, near-flat old road to a turquoise glacial lake. <strong>The gentlest five miles in the Rockies</strong> — no steep pitches anywhere. Right in your range.</li>
+        <li><strong><a href="https://www.pc.gc.ca/en/pn-np/bc/mount-robson/visit/overlander-falls" target="_blank">Overlander Falls</a></strong> — 1 mile round trip add-on</li>
       </ul>
       <p>Robson is 12,972 ft and hides in cloud two days out of three. When it's out, most imposing mountain view on the continent.</p>
     </div>
@@ -569,9 +611,9 @@ footer{
       <h3>Recovery Day · Hot Springs & Pack</h3>
       <div class="gauge"><div class="bar" style="width:11%"></div><span class="lbl">~90 miles round trip</span></div>
       <ul>
-        <li><strong>Pocahontas ghost town</strong> — flat, easy interpretive loop through early-1900s coal settlement</li>
-        <li><strong>Miette Hot Springs</strong> — hottest in the Canadian Rockies, 129°F source, pools at 104°F. ~$19.75 adult. Call 1-800-767-1611 for hours. <strong>K-G's reward for two big hike days.</strong></li>
-        <li><strong>Optional Sulphur Skyline</strong> — 8 km / 5 mi, 700m / 2,300 ft, relentlessly steep. Only if anyone wants to punish themselves.</li>
+        <li><strong><a href="https://www.pc.gc.ca/en/pn-np/ab/jasper/visit/pocahontas" target="_blank">Pocahontas ghost town</a></strong> — flat, easy interpretive loop through early-1900s coal settlement</li>
+        <li><strong><a href="https://www.hotsprings.ca/miette-hot-springs" target="_blank">Miette Hot Springs</a></strong> — hottest in the Canadian Rockies, 129°F source, pools at 104°F. ~$19.75 adult. Call 1-800-767-1611 for hours. <strong>K-G's reward for two big hike days.</strong></li>
+        <li><strong><a href="https://www.pc.gc.ca/en/pn-np/ab/jasper/visit/sulphur-skyline" target="_blank">Optional Sulphur Skyline</a></strong> — 8 km / 5 mi, 700m / 2,300 ft, relentlessly steep. Only if anyone wants to punish themselves.</li>
       </ul>
       <p>Soak, relax, pack, fuel in Hinton, <strong>leave the cabin park pass in the Welcome Guest Binder</strong> — $150 charge if it goes missing.</p>
     </div>
@@ -594,7 +636,7 @@ footer{
       <h3>The Parkway, Take Two</h3>
       <div class="gauge"><div class="bar" style="width:25%"></div><span class="lbl">210 miles · 5h · leave 8:00am</span></div>
       <p>You've already seen every viewpoint, so today you're selective — and you have time for a real hike.</p>
-      <div class="note"><b>Parker Ridge</b> — 3.1 miles round trip, 820 ft, ~2 hours. Gentle switchbacks up an open slope to a ridgeline above the <strong>Saskatchewan Glacier</strong>, a 5.6 mile river of ice. Best views-per-step on the parkway and paced for K-G. Bring a windbreaker; ridge is fully exposed.</div>
+      <div class="note"><b><a href="https://www.pc.gc.ca/en/pn-np/ab/banff-lake-louise/visit/parker-ridge" target="_blank">Parker Ridge</a></b> — 3.1 miles round trip, 820 ft, ~2 hours. Gentle switchbacks up an open slope to a ridgeline above the <strong>Saskatchewan Glacier</strong>, a 5.6 mile river of ice. Best views-per-step on the parkway and paced for K-G. Bring a windbreaker; ridge is fully exposed.</div>
       <p>Roll into Canmore around 5:00pm, relaxed, right as everyone lands. Check-in is 4pm. Ben, Kelly, Jane, Jana and Doc land at Calgary — 1h15 to Canmore. Tell them to buy groceries in Calgary or Canmore, <em>not</em> Banff.</p>
     </div>
 
@@ -603,7 +645,7 @@ footer{
       <div class="dayhead"><span class="dt">Fri · Sept 11</span></div>
       <h3>Convergence</h3>
       <div class="gauge"><div class="bar" style="width:3%"></div><span class="lbl">YYC → Canmore</span></div>
-      <p>Downtown Canmore is five minutes: Communitea, Grizzly Paw Brewing, Main Street. Group dinner at the condo — eight people walking into a Banff restaurant on a Friday is a 90-minute wait. Hot tub and fire pit after.</p>
+      <p>Downtown Canmore is five minutes: <a href="https://www.communitea.ca/" target="_blank">Communitea</a>, <a href="https://www.grizzlypaw.com/" target="_blank">Grizzly Paw Brewing</a>, Main Street. Group dinner at the condo — eight people walking into a Banff restaurant on a Friday is a 90-minute wait. Hot tub and fire pit after.</p>
       <div class="note gold"><b>Travelling with a one-year-old.</b> Carriers beat strollers. Bring Jane a wind shell — gets cold the moment you stop moving.</div>
     </div>
 
@@ -625,17 +667,17 @@ footer{
       <h3>Lake Louise & Moraine</h3>
       <div class="gauge"><div class="bar" style="width:14%"></div><span class="lbl">~120 miles round trip</span></div>
       <div class="note red"><b>No shuttle, no Moraine Lake.</b> Road closed to private vehicles since 2023. Lake Louise parking gone by 7am. <strong>This is the reservation you set the Sept 10 alarm for.</strong></div>
-      <p><strong>Lake Louise Park & Ride</strong> at the ski resort — 1 hour from Canmore. Arrive 20 min before your window. Day pass at gate.</p>
+      <p><strong><a href="https://www.moraine.lake/" target="_blank">Lake Louise Park & Ride</a></strong> at the ski resort — 1 hour from Canmore. Arrive 20 min before your window. Day pass at gate.</p>
       <p><strong>Moraine Lake first:</strong></p>
       <ul>
-        <li><strong>The Rockpile</strong> — 2,000 ft, some stairs. Old $20-bill view. Non-negotiable.</li>
-        <li><strong>Consolation Lakes</strong> — 3.7 miles round trip, 213 ft gain. Quiet, near-flat, boulder field and lake. Best real hike K-G and a baby carrier can both do.</li>
+        <li><strong><a href="https://www.pc.gc.ca/en/pn-np/ab/banff-lake-louise/visit/moraine-lake" target="_blank">The Rockpile</a></strong> — 2,000 ft, some stairs. Old $20-bill view. Non-negotiable.</li>
+        <li><strong><a href="https://www.pc.gc.ca/en/pn-np/ab/banff-lake-louise/visit/consolation-lakes" target="_blank">Consolation Lakes</a></strong> — 3.7 miles round trip, 213 ft gain. Quiet, near-flat, boulder field and lake. Best real hike K-G and a baby carrier can both do.</li>
       </ul>
       <p><strong>Free Lake Connector to Lake Louise:</strong></p>
       <ul>
-        <li><strong>Lakeshore</strong> — 2.5 miles round trip, flat, everyone</li>
-        <li><strong>Lake Agnes Tea House</strong> — 4.4 miles round trip, 1,300 ft. Real 1901 tea house. <strong>Cash only.</strong></li>
-        <li><strong>Larch Valley</strong> for the strong — 5.4 miles, 1,755 ft. Larches peak Sept 18–25. <strong>Check trailhead sign</strong> — sometimes minimum group of 4 for bear safety.</li>
+        <li><strong><a href="https://www.pc.gc.ca/en/pn-np/ab/banff-lake-louise/visit/lake-louise" target="_blank">Lakeshore</a></strong> — 2.5 miles round trip, flat, everyone</li>
+        <li><strong><a href="https://www.pc.gc.ca/en/pn-np/ab/banff-lake-louise/visit/lake-agnes-tea-house" target="_blank">Lake Agnes Tea House</a></strong> — 4.4 miles round trip, 1,300 ft. Real 1901 tea house. <strong>Cash only.</strong></li>
+        <li><strong><a href="https://www.pc.gc.ca/en/pn-np/ab/banff-lake-louise/visit/larch-valley" target="_blank">Larch Valley</a></strong> for the strong — 5.4 miles, 1,755 ft. Larches peak Sept 18–25. <strong>Check trailhead sign</strong> — sometimes minimum group of 4 for bear safety.</li>
       </ul>
       <div class="note gold">K-G will announce he could do Larch Valley. He will then see 1,750 feet of switchbacks and his foot will develop opinions.</div>
     </div>
@@ -647,10 +689,10 @@ footer{
       <div class="gauge"><div class="bar" style="width:11%"></div><span class="lbl">~90 miles round trip</span></div>
       <p><strong>Before 9:00am</strong> — 55 min from Canmore, Bow Valley Parkway for wildlife. Lot fills completely.</p>
       <ul>
-        <li><strong>Lower Falls</strong> — 1.4 miles round trip on steel catwalks. Duck through tunnel to falls platform.</li>
-        <li><strong>Upper Falls</strong> — 3.4 miles round trip, gradual. Carrier for Jane, not a stroller.</li>
+        <li><strong><a href="https://www.pc.gc.ca/en/pn-np/ab/banff/visit/johnston-canyon" target="_blank">Lower Falls</a></strong> — 1.4 miles round trip on steel catwalks. Duck through tunnel to falls platform.</li>
+        <li><strong><a href="https://www.pc.gc.ca/en/pn-np/ab/banff/visit/johnston-canyon" target="_blank">Upper Falls</a></strong> — 3.4 miles round trip, gradual. Carrier for Jane, not a stroller.</li>
       </ul>
-      <p><strong>Afternoon:</strong> Banff Gondola up Sulphur Mountain (0.6 miles boardwalk ridge, 360°, zero climbing), then <strong>Banff Upper Hot Springs</strong> next door.</p>
+      <p><strong>Afternoon:</strong> <a href="https://www.banffnordegg.com/attractions/banff-gondola" target="_blank">Banff Gondola</a> up Sulphur Mountain (0.6 miles boardwalk ridge, 360°, zero climbing), then <strong><a href="https://www.pc.gc.ca/en/pn-np/ab/banff/visit/upper-hot-springs" target="_blank">Banff Upper Hot Springs</a></strong> next door.</p>
     </div>
 
     <div class="day park">
@@ -660,10 +702,10 @@ footer{
       <div class="gauge"><div class="bar" style="width:13%"></div><span class="lbl">~110 miles round trip</span></div>
       <p>Last full day with everyone. 1h20 from Canmore. Day pass covers it. Perfect mixed-ability day — enormous payoff, almost no elevation.</p>
       <ul>
-        <li><strong>Takakkaw Falls</strong> — 1,260 ft. Tight switchbacks on access road, fine if you go slow. Flat 0.8 mile walk to falls. <strong>Road closes early October</strong> — you're just inside.</li>
-        <li><strong>Emerald Lake loop</strong> — 3.2 miles, flat, most absurdly coloured lake in the Rockies. Mostly stroller-passable.</li>
-        <li><strong>Natural Bridge</strong> — five minutes</li>
-        <li><strong>Spiral Tunnels</strong> — trains loop through the mountain and cross over themselves at two elevations</li>
+        <li><strong><a href="https://www.pc.gc.ca/en/pn-np/bc/yoho/visit/takakkaw-falls" target="_blank">Takakkaw Falls</a></strong> — 1,260 ft. Tight switchbacks on access road, fine if you go slow. Flat 0.8 mile walk to falls. <strong>Road closes early October</strong> — you're just inside.</li>
+        <li><strong><a href="https://www.pc.gc.ca/en/pn-np/bc/yoho/visit/emerald-lake" target="_blank">Emerald Lake loop</a></strong> — 3.2 miles, flat, most absurdly coloured lake in the Rockies. Mostly stroller-passable.</li>
+        <li><strong><a href="https://www.pc.gc.ca/en/pn-np/bc/yoho/visit/natural-bridge" target="_blank">Natural Bridge</a></strong> — five minutes</li>
+        <li><strong><a href="https://www.pc.gc.ca/en/pn-np/bc/yoho/visit/spiral-tunnels" target="_blank">Spiral Tunnels</a></strong> — trains loop through the mountain and cross over themselves at two elevations</li>
       </ul>
       <p>Farewell dinner for you and Doc.</p>
     </div>
@@ -681,7 +723,7 @@ footer{
         <tr><td>Wheels up</td><td>11:00am</td></tr>
       </table>
       <p>Canmore being 1h15 from the airport is the one gift of not staying in Banff. Still don't cut it. <strong>Nobody else does the airport run.</strong></p>
-      <p><strong>For the remaining six</strong>, after a 6:15am start: Vermilion Lakes at sunrise (best reflections) · Fenland Trail, 1.3 miles, flat, stroller-friendly · Cave and Basin (where Canada's park system started in 1885), indoors, warm if weather turns · Tunnel Mountain, 2.9 miles round trip and 90 minutes, for whoever has legs. There is no tunnel. Proposed 1882, never built, kept the name anyway.</p>
+      <p><strong>For the remaining six</strong>, after a 6:15am start: <a href="https://www.pc.gc.ca/en/pn-np/ab/banff/visit/vermilion-lakes" target="_blank">Vermilion Lakes</a> at sunrise (best reflections) · <a href="https://www.pc.gc.ca/en/pn-np/ab/banff/visit/fenland-trail" target="_blank">Fenland Trail</a>, 1.3 miles, flat, stroller-friendly · <a href="https://www.pc.gc.ca/en/pn-np/ab/banff/visit/cave-and-basin" target="_blank">Cave and Basin</a> (where Canada's park system started in 1885), indoors, warm if weather turns · <a href="https://www.pc.gc.ca/en/pn-np/ab/banff/visit/tunnel-mountain" target="_blank">Tunnel Mountain</a>, 2.9 miles round trip and 90 minutes, for whoever has legs. There is no tunnel. Proposed 1882, never built, kept the name anyway.</p>
     </div>
 
     <div class="day park">
@@ -689,12 +731,12 @@ footer{
       <div class="dayhead"><span class="dt">Wed · Sept 16</span></div>
       <h3>Canmore & Kananaskis</h3>
       <div class="gauge"><div class="bar" style="width:4%"></div><span class="lbl">~30 miles round trip</span></div>
-      <div class="note gold"><b>Buy Kananaskis Conservation Passes</b> — $15 per vehicle, plate-registered, online. Your Banff pass doesn't work here.</div>
+      <div class="note gold"><b>Buy Kananaskis Conservation Passes</b> — <a href="https://shop.albertaparks.ca/" target="_blank">$15 per vehicle, plate-registered, online</a>. Your Banff pass doesn't work here.</div>
       <ul>
-        <li><strong>Grassi Lakes</strong>, easy/interpretive trail — 2.5 miles round trip, 656 ft, wide gravel to two turquoise pools under a waterfall with pictographs above. <strong>Best effort-to-payoff hike of the trip</strong>, ten minutes from the condo.</li>
-        <li><strong>Quarry Lake</strong> — flat, grassy, Three Sisters view, last group photo</li>
-        <li><strong>Canmore Main Street</strong> — Rocky Mountain Bagel Co., Grizzly Paw</li>
-        <li><strong>Chester Lake</strong> if anyone wants one more — 5.6 miles round trip, 1,017 ft, larch forest. Gravel road, drive slow.</li>
+        <li><strong><a href="https://www.albertaparks.ca/kananaskis-country/parks/kananaskis-provincial-park/grassi-lakes/" target="_blank">Grassi Lakes</a></strong>, easy/interpretive trail — 2.5 miles round trip, 656 ft, wide gravel to two turquoise pools under a waterfall with pictographs above. <strong>Best effort-to-payoff hike of the trip</strong>, ten minutes from the condo.</li>
+        <li><strong><a href="https://www.albertaparks.ca/kananaskis-country/parks/kananaskis-provincial-park/quarry-lake/" target="_blank">Quarry Lake</a></strong> — flat, grassy, Three Sisters view, last group photo</li>
+        <li><strong>Canmore Main Street</strong> — <a href="https://www.rockymountainbagel.com/" target="_blank">Rocky Mountain Bagel Co.</a>, <a href="https://www.grizzlypaw.com/" target="_blank">Grizzly Paw</a></li>
+        <li><strong><a href="https://www.albertaparks.ca/kananaskis-country/parks/kananaskis-provincial-park/chester-lake/" target="_blank">Chester Lake</a></strong> if anyone wants one more — 5.6 miles round trip, 1,017 ft, larch forest. Gravel road, drive slow.</li>
       </ul>
       <p>Last hot tub. Pack.</p>
     </div>
@@ -717,7 +759,7 @@ footer{
       <h3>Calgary → Moose Jaw</h3>
       <div class="gauge"><div class="bar" style="width:50%"></div><span class="lbl">430 miles · 7h</span></div>
       <p>Checkout 10:00am. Drop at YYC, Ben and Kelly return their rental, K-G and Natalie point the truck east.</p>
-      <div class="note"><b>Moose Jaw is where K-G finally gets his mineral soak.</b> Temple Gardens Hotel & Spa, real geothermal pool, right off the Trans-Canada. He earned it driving 850 miles on the 4th and hiking two big days.</div>
+      <div class="note"><b><a href="https://www.templegardenspa.com/" target="_blank">Temple Gardens Hotel & Spa</a></b> in Moose Jaw — real geothermal pool, right off the Trans-Canada. <strong>K-G's reward for two big hike days.</strong></div>
     </div>
 
     <div class="day transit big">
@@ -795,7 +837,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const year = now.getFullYear();
   const hours = String(now.getHours()).padStart(2,'0');
   const mins = String(now.getMinutes()).padStart(2,'0');
-  
+
   const timestamp = `Updated ${month} ${day}, ${year} · ${hours}:${mins}`;
   document.getElementById('timestamp').textContent = timestamp;
 });
@@ -804,18 +846,18 @@ document.addEventListener('DOMContentLoaded', () => {
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const tabName = btn.dataset.tab;
-    
+
     document.querySelectorAll('.tab-content').forEach(tab => {
       tab.classList.remove('active');
     });
-    
+
     document.querySelectorAll('.tab-btn').forEach(b => {
       b.classList.remove('active');
     });
-    
+
     document.getElementById(tabName).classList.add('active');
     btn.classList.add('active');
-    
+
     window.scrollTo({top: 0, behavior: 'smooth'});
   });
 });
