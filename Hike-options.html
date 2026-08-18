@@ -1,1 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiet Trails Near Camp — Hinton, Alberta</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;900&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#E6E9DF; --paper-2:#F2F4EC; --ink:#16211C; --ink-soft:#41504A;
+    --rule:#C3CBBB; --moss:#3E5C40; --river:#3C7186; --blaze:#D9A125; --card:#FFFFFF;
+    --shadow:0 1px 0 var(--rule), 0 8px 24px rgba(22,33,28,.06);
+  }
+  html[data-theme="dark"]{
+    --paper:#111917; --paper-2:#0C1211; --ink:#E3E8DF; --ink-soft:#98A79E;
+    --rule:#28352F; --moss:#7FA97C; --river:#6FB0C9; --blaze:#E8B93B; --card:#18211E;
+    --shadow:0 1px 0 var(--rule), 0 8px 24px rgba(0,0,0,.4);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Public Sans",system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.55;
+    -webkit-text-size-adjust:100%}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+  header{border-bottom:2px solid var(--ink);padding:28px 0 18px}
+  .eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--ink-soft);display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  h1{font-family:"Big Shoulders Display",Impact,sans-serif;font-weight:900;
+    font-size:clamp(44px,10vw,86px);line-height:.88;margin:10px 0 8px;text-transform:uppercase}
+  h1 em{font-style:normal;color:var(--moss)}
+  .standfirst{max-width:56ch;color:var(--ink-soft);margin:0}
+  .toggle{margin-left:auto;background:none;border:1px solid var(--rule);color:var(--ink-soft);
+    font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    padding:6px 10px;border-radius:2px;cursor:pointer}
+  .toggle:hover{border-color:var(--ink);color:var(--ink)}
+  .toggle:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--river);outline-offset:2px}
+
+  .mapshell{margin:22px 0 0;border:1px solid var(--rule);background:var(--card);box-shadow:var(--shadow)}
+  #map{height:520px;min-height:360px;width:100%;background:var(--paper-2)}
+  @media (max-width:600px){#map{height:380px}}
+  .mapnote{display:none;padding:14px;font-size:14px;color:var(--ink-soft);border-top:1px solid var(--rule)}
+  .mapnote.show{display:block}
+  .maplegend{display:flex;gap:20px;flex-wrap:wrap;padding:10px 14px;border-top:1px solid var(--rule);
+    font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--ink-soft)}
+  .swatch{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px;vertical-align:1px}
+
+  .pin{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;
+    background:#3E5C40;color:#fff;border:2px solid #F2F4EC;
+    font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+  .pin.house{background:#D9A125;color:#2A1F05;width:38px;height:38px;font-size:20px;line-height:1}
+  .leaflet-popup-content{margin:12px 14px;font-family:"Public Sans",sans-serif;font-size:14px;color:#16211C}
+  .pop-name{font-family:"Big Shoulders Display",sans-serif;font-weight:700;font-size:22px;line-height:1;
+    text-transform:uppercase;display:block;margin-bottom:4px;color:#16211C}
+  .pop-stat{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:#41504A;display:block;margin-bottom:6px}
+
+  .cluster{padding:44px 0 8px;border-top:1px solid var(--rule)}
+  .cluster:first-of-type{border-top:none}
+  .cluster-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+  .cluster-head h2{font-family:"Big Shoulders Display",sans-serif;font-weight:700;text-transform:uppercase;
+    font-size:clamp(26px,4.5vw,38px);line-height:1;margin:0}
+  .drive{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--river);border:1px solid currentColor;padding:3px 8px;border-radius:2px;white-space:nowrap}
+  .cluster-note{color:var(--ink-soft);max-width:60ch;margin:0 0 20px;font-size:15px}
+
+  .cards{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+  .card{background:var(--card);border:1px solid var(--rule);padding:16px;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;gap:10px}
+  .card.is-active{border-color:var(--moss);box-shadow:0 0 0 2px var(--moss),var(--shadow)}
+  .card-top{display:flex;gap:10px;align-items:flex-start}
+  .num{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;color:#fff;background:var(--moss);
+    width:22px;height:22px;display:grid;place-items:center;border-radius:50%;flex:none;margin-top:3px}
+  .card h3{font-family:"Big Shoulders Display",sans-serif;font-weight:700;text-transform:uppercase;
+    font-size:24px;line-height:.98;margin:0}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:9px 0}
+  .stat{font-family:"IBM Plex Mono",monospace}
+  .stat b{display:block;font-size:15px;font-weight:600}
+  .stat span{display:block;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-top:2px}
+  .blurb{margin:0;font-size:14.5px;color:var(--ink-soft)}
+  .tags{display:flex;gap:6px;flex-wrap:wrap}
+  .tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    border:1px solid var(--rule);padding:2px 7px;border-radius:2px;color:var(--ink-soft)}
+  .tag.easy{color:var(--moss);border-color:currentColor}
+  .tag.moderate{color:var(--river);border-color:currentColor}
+  .tag.hard{color:#B4552B;border-color:currentColor}
+  .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:4px}
+  .btn{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    text-decoration:none;border:1px solid var(--rule);padding:7px 10px;border-radius:2px;
+    color:var(--ink);background:none;cursor:pointer;line-height:1}
+  .btn:hover{border-color:var(--moss);color:var(--moss)}
+  .btn.primary{border-color:var(--river);color:var(--river)}
+  .btn.primary:hover{background:var(--river);color:#fff}
+
+  .skip{margin:44px 0 0;border:1px dashed var(--rule);padding:18px;background:var(--paper-2)}
+  .skip h2{font-family:"Big Shoulders Display",sans-serif;text-transform:uppercase;font-size:24px;margin:0 0 6px}
+  .skip p{margin:0 0 12px;color:var(--ink-soft);font-size:15px;max-width:62ch}
+
+  .linklist{margin:44px 0 0;border-top:1px solid var(--rule);padding-top:24px}
+  .linklist h2{font-family:"Big Shoulders Display",sans-serif;text-transform:uppercase;font-size:26px;margin:0 0 4px}
+  .linklist p{margin:0 0 14px;color:var(--ink-soft);font-size:15px}
+  .linklist ol{margin:0;padding-left:0;list-style:none;
+    font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.9}
+  .linklist li{border-bottom:1px dotted var(--rule);padding:6px 0;
+    display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
+  .linklist a{color:var(--river);text-decoration:none;border-bottom:1px solid currentColor}
+  .linklist a:hover{color:var(--ink)}
+  .linklist .meta{color:var(--ink-soft);white-space:nowrap}
+
+  footer{margin-top:48px;border-top:2px solid var(--ink);padding:16px 0 40px;
+    font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;color:var(--ink-soft);
+    display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">
+      <span>Jasper Week · Sep 6–11</span><span>Yellowhead County, Alberta</span>
+      <button class="toggle" id="themeBtn" type="button">Dark</button>
+    </div>
+    <h1>Quiet trails<br><em>near camp</em></h1>
+    <p class="standfirst">Ten walks within about half an hour of the cabin, picked for views over crowds. Most of this is provincial park or Hinton municipal trail, well outside the Jasper townsite traffic funnel — no park pass, no shuttle lottery.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="mapshell">
+    <div id="map"></div>
+    <div class="mapnote" id="mapnote">Map tiles couldn't load — you're probably offline or behind a firewall. Every trail is listed below with its AllTrails page and a directions link, so nothing here depends on the map.</div>
+    <div class="maplegend">
+      <span><i class="swatch" style="background:#D9A125"></i>The cabin</span>
+      <span><i class="swatch" style="background:#3E5C40"></i>Trailhead</span>
+      <span>Tap a pin, or hit "Show on map" on any card</span>
+    </div>
+  </div>
+
+  <section class="cluster">
+    <div class="cluster-head"><h2>Out the door</h2><span class="drive">5–15 min</span></div>
+    <p class="cluster-note">Hinton's own trail network. For the afternoon nobody feels like driving anywhere.</p>
+    <div class="cards" id="cards-1"></div>
+  </section>
+
+  <section class="cluster">
+    <div class="cluster-head"><h2>Switzer Provincial Park</h2><span class="drive">20–22 min</span></div>
+    <p class="cluster-note">North on Highway 40. A provincial park sitting right next door to a national park is the best crowd-avoidance trick in this corner of Alberta.</p>
+    <div class="cards" id="cards-2"></div>
+  </section>
+
+  <section class="cluster">
+    <div class="cluster-head"><h2>Jasper east gate</h2><span class="drive">30 min</span></div>
+    <p class="cluster-note">Inside the park, at the end almost nobody drives to. Park pass required here — day passes only, no need for the annual.</p>
+    <div class="cards" id="cards-3"></div>
+  </section>
+
+  <div class="skip">
+    <h2>One we're skipping</h2>
+    <p>Old Man Trail via Roche Bonhomme: 5.6 miles with 4,363 feet of gain. That is not a hike, that is a dare, and we have a man with a foot situation and a documented tendency to narrate his own knees.</p>
+    <a class="btn" href="https://www.alltrails.com/trail/canada/alberta/old-man-trail-via-roche-bonhomme-route" target="_blank" rel="noopener">See it anyway &rarr;</a>
+  </div>
+
+  <section class="linklist">
+    <h2>All links</h2>
+    <p>Every trail on this page, in one place.</p>
+    <ol id="links"></ol>
+  </section>
+
+  <footer>
+    <span>Trail data: AllTrails · Map: OpenStreetMap contributors</span>
+    <span id="stamp"></span>
+  </footer>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+var HOME = {lat:53.4114, lng:-117.5646};
+
+var TRAILS = [
+  {n:1, group:1, name:"Happy Creek Trail", mi:4.2, ft:711, diff:"Moderate", rating:4.5, drive:"5 min",
+   lat:53.3928, lng:-117.5866, type:"Loop",
+   blurb:"Starts at the Beaver Boardwalk and passes a genuinely impressive beaver dam. Forest walking, well signed, easy to cut short.",
+   url:"https://www.alltrails.com/trail/canada/alberta/happy-creek-trail-system"},
+  {n:2, group:1, name:"Happy Creek & Ranger Loop", mi:6.4, ft:1033, diff:"Moderate", rating:4.4, drive:"5 min",
+   lat:53.3949, lng:-117.5822, type:"Loop",
+   blurb:"The longer version off the same trailhead, for the day somebody wants a real leg stretch.",
+   url:"https://www.alltrails.com/trail/canada/alberta/happy-creek-and-ranger-loop"},
+  {n:3, group:1, name:"Spring Fling Trail", mi:2.5, ft:426, diff:"Moderate", rating:4.6, drive:"15 min",
+   lat:53.3820, lng:-117.6967, type:"Out & back",
+   blurb:"River and viewpoints west toward Brûlé, and about as close to empty as a 4.6-star trail gets.",
+   url:"https://www.alltrails.com/trail/canada/alberta/spring-fling-trail"},
+  {n:4, group:1, name:"Spring Fling Loop", mi:4.3, ft:682, diff:"Moderate", rating:4.4, drive:"15 min",
+   lat:53.3833, lng:-117.6941, type:"Loop",
+   blurb:"Same trailhead, full loop. Adds distance without adding much steepness.",
+   url:"https://www.alltrails.com/trail/canada/alberta/spring-fling-loop"},
+  {n:5, group:2, name:"Kelly's Bathtub & Jarvis Lake", mi:2.3, ft:318, diff:"Easy", rating:4.4, drive:"20 min",
+   lat:53.4727, lng:-117.7938, type:"Loop",
+   blurb:"The gentlest one here. Two lakes, a viewpoint, and a name nobody has ever explained.",
+   url:"https://www.alltrails.com/trail/canada/alberta/kellys-bathtub-and-jarvis-lake-trail-loop"},
+  {n:6, group:2, name:"Kelly's Bathtub Loop", mi:0.5, ft:101, diff:"Easy", rating:4.6, drive:"20 min",
+   lat:53.4735, lng:-117.7925, type:"Loop",
+   blurb:"Half a mile to a lake viewpoint. The stroller-and-snacks option when Jane calls it a day.",
+   url:"https://www.alltrails.com/trail/canada/alberta/kellys-bathtub-loop-trail"},
+  {n:7, group:2, name:"Friendly Vistas Trail", mi:1.9, ft:344, diff:"Easy", rating:4.6, drive:"20 min",
+   lat:53.4705, lng:-117.7965, type:"Loop",
+   blurb:"Short lakeside loop, highest rating in the area, and yes, that is its actual name.",
+   url:"https://www.alltrails.com/trail/canada/alberta/friendly-vistas-trail"},
+  {n:8, group:2, name:"Joachim Valley to Airplane Wreckage", mi:4.6, ft:567, diff:"Moderate", rating:4.3, drive:"22 min",
+   lat:53.4470, lng:-117.8070, type:"Out & back",
+   blurb:"Valley walking to the remains of a small plane crash. Modest climbing, memorable turnaround point.",
+   url:"https://www.alltrails.com/trail/canada/alberta/joachim-valley-trail-to-airplane-wreckage"},
+  {n:9, group:2, name:"Athabasca Lookout Trail", mi:6.8, ft:1827, diff:"Moderate", rating:4.5, drive:"22 min",
+   lat:53.4468, lng:-117.8098, type:"Out & back",
+   blurb:"The one with a real summit payoff. Also the one where a certain foot injury will be discussed at length, uphill, for two hours.",
+   url:"https://www.alltrails.com/trail/canada/alberta/athabasca-lookout-trail"},
+  {n:10, group:3, name:"Punch Bowl Falls via Miette Upper Loop", mi:2.1, ft:396, diff:"Moderate", rating:4.3, drive:"30 min",
+   lat:53.2035, lng:-117.9200, type:"Loop",
+   blurb:"Waterfall in a slot of rock, plus the ruins of the old Pocahontas coal town. Big payoff for two miles.",
+   url:"https://www.alltrails.com/trail/canada/alberta/pocahontas-upper-loop-to-punch-bowl-falls"}
+];
+
+function directions(lat,lng){
+  return "https://www.google.com/maps/dir/?api=1&destination=" + lat + "," + lng;
+}
+
+/* ---------- cards (built first, so the page works with or without the map) ---------- */
+TRAILS.forEach(function(t){
+  var el = document.createElement('div');
+  el.className = 'card';
+  el.innerHTML =
+    '<div class="card-top"><span class="num">' + t.n + '</span><h3>' + t.name + '</h3></div>' +
+    '<div class="stats">' +
+      '<div class="stat"><b>' + t.mi + '</b><span>miles</span></div>' +
+      '<div class="stat"><b>' + t.ft.toLocaleString() + '</b><span>feet up</span></div>' +
+      '<div class="stat"><b>' + t.rating + '&#9733;</b><span>rating</span></div>' +
+    '</div>' +
+    '<p class="blurb">' + t.blurb + '</p>' +
+    '<div class="tags">' +
+      '<span class="tag ' + t.diff.toLowerCase() + '">' + t.diff + '</span>' +
+      '<span class="tag">' + t.type + '</span>' +
+      '<span class="tag">' + t.drive + ' from camp</span>' +
+    '</div>' +
+    '<div class="actions">' +
+      '<a class="btn primary" href="' + t.url + '" target="_blank" rel="noopener">AllTrails &rarr;</a>' +
+      '<a class="btn" href="' + directions(t.lat,t.lng) + '" target="_blank" rel="noopener">Directions</a>' +
+      '<button class="btn" type="button" data-map="' + t.n + '">Show on map</button>' +
+    '</div>';
+  document.getElementById('cards-' + t.group).appendChild(el);
+
+  var li = document.createElement('li');
+  li.innerHTML = '<a href="' + t.url + '" target="_blank" rel="noopener">' + t.n + '. ' + t.name + '</a>' +
+                 '<span class="meta">' + t.mi + ' mi · ' + t.ft.toLocaleString() + ' ft · ' + t.drive + '</span>';
+  document.getElementById('links').appendChild(li);
+});
+
+var liSkip = document.createElement('li');
+liSkip.innerHTML = '<a href="https://www.alltrails.com/trail/canada/alberta/old-man-trail-via-roche-bonhomme-route" target="_blank" rel="noopener">Old Man Trail via Roche Bonhomme (skipping)</a>' +
+                   '<span class="meta">5.6 mi · 4,363 ft · nope</span>';
+document.getElementById('links').appendChild(liSkip);
+
+/* ---------- map ---------- */
+(function(){
+  if (typeof L === 'undefined'){
+    document.getElementById('mapnote').classList.add('show');
+    document.getElementById('map').style.display = 'none';
+    return;
+  }
+
+  var map = L.map('map', {scrollWheelZoom:false}).setView([53.36,-117.72], 9);
+
+  var street = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom:18, attribution:'&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  var topo = L.tileLayer('https://a.tile.opentopomap.org/{z}/{x}/{y}.png', {
+    maxZoom:16, attribution:'&copy; OpenStreetMap, SRTM | &copy; OpenTopoMap (CC-BY-SA)'
+  });
+
+  L.control.layers({"Street":street, "Topographic":topo}, null, {position:'topright'}).addTo(map);
+
+  var tileFails = 0;
+  street.on('tileerror', function(){
+    tileFails++;
+    if (tileFails > 3) document.getElementById('mapnote').classList.add('show');
+  });
+
+  var houseIcon = L.divIcon({html:'<div class="pin house">&#127968;</div>', className:'', iconSize:[38,38], iconAnchor:[19,19]});
+  L.marker([HOME.lat, HOME.lng], {icon:houseIcon, zIndexOffset:1000}).addTo(map)
+    .bindPopup('<span class="pop-name">The cabin</span>' +
+               '<span class="pop-stat">Hinton area &middot; Sep 6&ndash;11 &middot; park pass included</span>' +
+               'Base camp. Everything on this map is inside a 30-minute drive.');
+
+  var markers = {};
+  TRAILS.forEach(function(t){
+    var icon = L.divIcon({html:'<div class="pin">' + t.n + '</div>', className:'', iconSize:[30,30], iconAnchor:[15,15]});
+    markers[t.n] = L.marker([t.lat, t.lng], {icon:icon}).addTo(map).bindPopup(
+      '<span class="pop-name">' + t.name + '</span>' +
+      '<span class="pop-stat">' + t.mi + ' mi &middot; ' + t.ft.toLocaleString() + ' ft gain &middot; ' +
+        t.diff + ' &middot; ' + t.rating + '&#9733; &middot; ' + t.drive + ' drive</span>' +
+      t.blurb + '<br><br>' +
+      '<a href="' + t.url + '" target="_blank" rel="noopener">Open in AllTrails &rarr;</a> &nbsp;·&nbsp; ' +
+      '<a href="' + directions(t.lat, t.lng) + '" target="_blank" rel="noopener">Directions</a>'
+    );
+  });
+
+  var pts = TRAILS.map(function(t){ return [t.lat, t.lng]; });
+  pts.push([HOME.lat, HOME.lng]);
+  map.fitBounds(L.latLngBounds(pts), {padding:[40,40]});
+
+  // containers that size late (embeds, iframes, slow fonts) can render a grey box
+  function refresh(){ map.invalidateSize(); }
+  setTimeout(refresh, 200);
+  setTimeout(refresh, 1200);
+  window.addEventListener('load', refresh);
+  window.addEventListener('resize', refresh);
+
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest('[data-map]');
+    if (!btn) return;
+    var n = btn.getAttribute('data-map');
+    var cards = document.querySelectorAll('.card');
+    for (var i=0;i<cards.length;i++) cards[i].classList.remove('is-active');
+    btn.closest('.card').classList.add('is-active');
+    map.setView(markers[n].getLatLng(), 12, {animate:true});
+    markers[n].openPopup();
+    document.getElementById('map').scrollIntoView({behavior:'smooth', block:'center'});
+  });
+})();
+
+/* ---------- theme ---------- */
+var btn = document.getElementById('themeBtn');
+function setTheme(dark){
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  btn.textContent = dark ? 'Light' : 'Dark';
+}
+setTheme(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+btn.addEventListener('click', function(){
+  setTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
+});
+
+document.getElementById('stamp').textContent =
+  'Generated ' + new Date().toLocaleString(undefined, {dateStyle:'medium', timeStyle:'short'});
+</script>
+</body>
+</html>
 
