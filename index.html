@@ -369,8 +369,9 @@ footer{
   <div class="tabs-nav-inner">
     <button class="tab-btn active" data-tab="briefing">Briefing</button>
     <button class="tab-btn" data-tab="outbound">Outbound</button>
-    <button class="tab-btn" data-tab="jasper">Jasper</button>
     <button class="tab-btn" data-tab="parkway">Parkway</button>
+    <button class="tab-btn" data-tab="jasper">Jasper</button>
+    <button class="tab-btn" data-tab="alternatives">Alternatives</button>
     <button class="tab-btn" data-tab="banff">Banff</button>
     <button class="tab-btn" data-tab="home">Home</button>
     <button class="tab-btn" data-tab="practical">Practical</button>
@@ -502,10 +503,10 @@ footer{
 
 </div>
 
-<div id="jasper" class="tab-content">
+<div id="parkway" class="tab-content">
 
 <div class="leg">
-  <div class="leg-label">Leg Two · Jasper Base</div>
+  <div class="leg-label">Leg Two · The Icefields Parkway</div>
   <div class="days">
 
     <div class="day transit big">
@@ -529,6 +530,17 @@ footer{
       <div class="note red"><b>At the glacier, stay behind every rope.</b> People die in crevasses here.</div>
       <p>Jasper ~5:00pm, dinner in town, Hinton by 6:30pm.</p>
     </div>
+
+  </div>
+</div>
+
+</div>
+
+<div id="jasper" class="tab-content">
+
+<div class="leg">
+  <div class="leg-label">Leg Three · Jasper Base</div>
+  <div class="days">
 
     <div class="day park">
       <div class="dot"></div>
@@ -606,10 +618,22 @@ footer{
 
 </div>
 
-<div id="parkway" class="tab-content">
+<div id="alternatives" class="tab-content">
+
+<h2>Quiet Trails · Alternatives</h2>
+
+<p>Not feeling the schedule? Ten walks within about half an hour of the cabin, picked for views over crowds. Most of this is provincial park or Hinton municipal trail, well outside the Jasper townsite traffic funnel — no park pass, no shuttle lottery.</p>
+
+<p><a href="Hike-options.html" target="_blank">See the full alternatives page</a> with detailed trail descriptions, AllTrails links, and directions for every quiet walk near camp.</p>
+
+<div class="note teal"><b>The quick version:</b> Hinton's own trail network for afternoons nobody feels like driving. Switzer Provincial Park (20–22 min) sits right next door to the national park for crowd-avoidance. Jasper east gate (30 min) is inside the park at the end almost nobody drives to. Day passes only, no annual required.</div>
+
+</div>
+
+<div id="banff" class="tab-content">
 
 <div class="leg">
-  <div class="leg-label">Leg Three · The Icefields Again</div>
+  <div class="leg-label">Leg Four · The Parkway, Take Two</div>
   <div class="days">
 
     <div class="day transit big">
@@ -634,12 +658,8 @@ footer{
   </div>
 </div>
 
-</div>
-
-<div id="banff" class="tab-content">
-
 <div class="leg">
-  <div class="leg-label">Leg Four · Canmore</div>
+  <div class="leg-label">Leg Five · Canmore</div>
   <div class="days">
 
     <div class="day park">
@@ -730,7 +750,7 @@ footer{
 <div id="home" class="tab-content">
 
 <div class="leg">
-  <div class="leg-label">Leg Five · Eastbound</div>
+  <div class="leg-label">Leg Six · Eastbound</div>
   <div class="days">
 
     <div class="day transit big">
@@ -815,7 +835,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const year = now.getFullYear();
   const hours = String(now.getHours()).padStart(2,'0');
   const mins = String(now.getMinutes()).padStart(2,'0');
-
+  
   const timestamp = `Updated ${month} ${day}, ${year} · ${hours}:${mins}`;
   document.getElementById('timestamp').textContent = timestamp;
 });
@@ -823,18 +843,18 @@ document.addEventListener('DOMContentLoaded', () => {
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const tabName = btn.dataset.tab;
-
+    
     document.querySelectorAll('.tab-content').forEach(tab => {
       tab.classList.remove('active');
     });
-
+    
     document.querySelectorAll('.tab-btn').forEach(b => {
       b.classList.remove('active');
     });
-
+    
     document.getElementById(tabName).classList.add('active');
     btn.classList.add('active');
-
+    
     window.scrollTo({top: 0, behavior: 'smooth'});
   });
 });
