@@ -30,10 +30,17 @@
     font-size:clamp(44px,10vw,86px);line-height:.88;margin:10px 0 8px;text-transform:uppercase}
   h1 em{font-style:normal;color:var(--moss)}
   .standfirst{max-width:56ch;color:var(--ink-soft);margin:0}
-  .toggle{margin-left:auto;background:none;border:1px solid var(--rule);color:var(--ink-soft);
+  .toggle{background:none;border:1px solid var(--rule);color:var(--ink-soft);
     font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
     padding:6px 10px;border-radius:2px;cursor:pointer}
   .toggle:hover{border-color:var(--ink);color:var(--ink)}
+  .home{margin-left:auto;display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+    background:none;border:1px solid var(--rule);color:var(--ink-soft);
+    font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    padding:6px 10px;border-radius:2px}
+  .home:hover{border-color:var(--moss);color:var(--moss)}
+  .home-foot{color:var(--river);text-decoration:none;border-bottom:1px solid currentColor}
+  .home-foot:hover{color:var(--ink)}
   .toggle:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--river);outline-offset:2px}
 
   .mapshell{margin:22px 0 0;border:1px solid var(--rule);background:var(--card);box-shadow:var(--shadow)}
@@ -118,10 +125,11 @@
   <div class="wrap">
     <div class="eyebrow">
       <span>Jasper Week · Sep 6–11</span><span>Yellowhead County, Alberta</span>
+      <a class="home" href="index.html">&larr;&nbsp;Full itinerary</a>
       <button class="toggle" id="themeBtn" type="button">Dark</button>
     </div>
     <h1>Quiet trails<br><em>near camp</em></h1>
-    <p class="standfirst">Ten walks within about half an hour of the cabin, picked for views over crowds. Most of this is provincial park or Hinton municipal trail, well outside the Jasper townsite traffic funnel — no park pass, no shuttle lottery.</p>
+    <p class="standfirst">Twenty-five walks within an hour of the cabin, picked for views over crowds. Grouped by how far you have to drive, so you can match the hike to how much of the day is left — and to whose foot is acting up.</p>
   </div>
 </header>
 
@@ -154,6 +162,18 @@
     <div class="cards" id="cards-3"></div>
   </section>
 
+  <section class="cluster">
+    <div class="cluster-head"><h2>Miette Road &amp; the Brûlé backroad</h2><span class="drive">40–50 min</span></div>
+    <p class="cluster-note">The dead-end road up to the hot springs, plus one gravel detour past Brûlé. Soaking pools at the end of the Miette road make this the best-value drive on the list.</p>
+    <div class="cards" id="cards-4"></div>
+  </section>
+
+  <section class="cluster">
+    <div class="cluster-head"><h2>Jasper town side</h2><span class="drive">55–60 min</span></div>
+    <p class="cluster-note">The full hour, and worth it at least twice. Note for 2026: Maligne Canyon and the Cavell Road are closed for the whole season, so ignore any Top 10 list that leads with them — the lakes benchland behind town is where the locals go anyway.</p>
+    <div class="cards" id="cards-5"></div>
+  </section>
+
   <div class="skip">
     <h2>One we're skipping</h2>
     <p>Old Man Trail via Roche Bonhomme: 5.6 miles with 4,363 feet of gain. That is not a hike, that is a dare, and we have a man with a foot situation and a documented tendency to narrate his own knees.</p>
@@ -167,6 +187,7 @@
   </section>
 
   <footer>
+    <span><a class="home-foot" href="index.html">&larr; Back to the full itinerary</a></span>
     <span>Trail data: AllTrails · Map: OpenStreetMap contributors</span>
     <span id="stamp"></span>
   </footer>
@@ -216,7 +237,69 @@ var TRAILS = [
   {n:10, group:3, name:"Punch Bowl Falls via Miette Upper Loop", mi:2.1, ft:396, diff:"Moderate", rating:4.3, drive:"30 min",
    lat:53.2035, lng:-117.9200, type:"Loop",
    blurb:"Waterfall in a slot of rock, plus the ruins of the old Pocahontas coal town. Big payoff for two miles.",
-   url:"https://www.alltrails.com/trail/canada/alberta/pocahontas-upper-loop-to-punch-bowl-falls"}
+   url:"https://www.alltrails.com/trail/canada/alberta/pocahontas-upper-loop-to-punch-bowl-falls"},
+  {n:11, group:3, name:"Pocahontas Trail", mi:2.1, ft:328, diff:"Easy", rating:4.4, drive:"30 min",
+   lat:53.2058, lng:-117.9165, type:"Out & back",
+   blurb:"The flatter walk through the same old coal-town site. Same history, less climbing.",
+   url:"https://www.alltrails.com/trail/canada/alberta/pocahontas-trail"},
+
+  {n:12, group:4, name:"Talbot Lake Viewpoint", mi:1.0, ft:206, diff:"Easy", rating:4.7, drive:"40 min",
+   lat:53.1600, lng:-118.0200, type:"Out & back",
+   blurb:"A mile to a lake-and-mountain view, and the stretch of Highway 16 where bighorn sheep stand in the road like they own it.",
+   url:"https://www.alltrails.com/trail/canada/alberta/talbot-lake-viewpoint"},
+  {n:13, group:4, name:"Hidden Valley", mi:2.5, ft:1456, diff:"Moderate", rating:4.7, drive:"40 min",
+   lat:53.1900, lng:-117.8500, type:"Out & back",
+   blurb:"Steep for its length but short, and genuinely quiet — 4.7 stars and almost nobody on it.",
+   url:"https://www.alltrails.com/trail/canada/alberta/hidden-valley"},
+  {n:14, group:4, name:"Miette Hot Springs Trail", mi:1.1, ft:367, diff:"Moderate", rating:4.4, drive:"50 min",
+   lat:53.1305, lng:-117.7708, type:"Out & back",
+   blurb:"Short walk from the pools to the ruins of the original 1930s bathhouse. Partly paved, stroller-passable.",
+   url:"https://www.alltrails.com/trail/canada/alberta/miette-hot-springs"},
+  {n:15, group:4, name:"Sulphur Skyline Trail", mi:5.1, ft:2139, diff:"Hard", rating:4.8, drive:"50 min",
+   lat:53.1301, lng:-117.7702, type:"Out & back",
+   blurb:"The best summit view in this half of the park, and the hot springs are at the trailhead when you come down. Highest-rated trail on this page — and the hardest.",
+   url:"https://www.alltrails.com/trail/canada/alberta/sulphur-skyline-trail"},
+  {n:16, group:4, name:"Ogre Canyon Ridgeline", mi:2.9, ft:626, diff:"Moderate", rating:4.6, drive:"50 min",
+   lat:53.2550, lng:-117.6950, type:"Loop",
+   blurb:"Out past Brûlé on gravel — take the truck. A canyon and a ridge walk, and you will likely have both to yourselves.",
+   url:"https://www.alltrails.com/trail/canada/alberta/ogre-canyon-ridgeline-trail"},
+
+  {n:17, group:5, name:"Mina & Cabin Lakes", mi:4.5, ft:1010, diff:"Moderate", rating:4.1, drive:"55 min",
+   lat:52.8790, lng:-118.0880, type:"Loop",
+   blurb:"Starts at the edge of town and climbs into the lake benchland behind it. This is the network locals actually use.",
+   url:"https://www.alltrails.com/trail/canada/alberta/mina-lake-and-cabin-lakes-trail"},
+  {n:18, group:5, name:"Mina Riley Loop", mi:5.4, ft:971, diff:"Moderate", rating:4.3, drive:"55 min",
+   lat:52.8795, lng:-118.0865, type:"Loop",
+   blurb:"The longer version of the same benchland circuit. Four lakes, steady grades, no crowds.",
+   url:"https://www.alltrails.com/trail/canada/alberta/mina-riley-loop"},
+  {n:19, group:5, name:"Patricia Lake Circle", mi:3.0, ft:341, diff:"Easy", rating:4.3, drive:"55 min",
+   lat:52.9010, lng:-118.1010, type:"Loop",
+   blurb:"Gentle lake circuit with Pyramid Mountain over your shoulder the whole way. Good elk-watching in September — from a distance.",
+   url:"https://www.alltrails.com/trail/canada/alberta/patricia-lake"},
+  {n:20, group:5, name:"Cottonwood Creek Trail", mi:2.6, ft:419, diff:"Easy", rating:4.3, drive:"55 min",
+   lat:52.8850, lng:-118.0930, type:"Out & back",
+   blurb:"Old rail grade along a creek. Flat, wide, and about as forgiving as trails get up here.",
+   url:"https://www.alltrails.com/trail/canada/alberta/cottonwood-creek-trail"},
+  {n:21, group:5, name:"Pyramid Lake Loop", mi:3.8, ft:711, diff:"Moderate", rating:4.6, drive:"57 min",
+   lat:52.9230, lng:-118.1010, type:"Loop",
+   blurb:"Lakeshore with the red mountain reflected in it. Walk out to the island footbridge while you're there.",
+   url:"https://www.alltrails.com/trail/canada/alberta/pyramid-lake-loop"},
+  {n:22, group:5, name:"Lake Annette Loop", mi:1.7, ft:295, diff:"Easy", rating:4.7, drive:"55 min",
+   lat:52.8830, lng:-118.0230, type:"Loop",
+   blurb:"Fully paved, wheelchair and stroller rated, and still 4.7 stars. The one that works no matter whose feet are complaining.",
+   url:"https://www.alltrails.com/trail/canada/alberta/lake-annette-loop"},
+  {n:23, group:5, name:"Old Fort Point Trail", mi:2.4, ft:587, diff:"Moderate", rating:4.7, drive:"55 min",
+   lat:52.8683, lng:-118.0621, type:"Loop",
+   blurb:"Best 360-degree view for the least effort anywhere near town. Popular — go before 9 or after 5. Steep steps at the start, gentler if you walk it backwards.",
+   url:"https://www.alltrails.com/trail/canada/alberta/old-fort-point"},
+  {n:24, group:5, name:"Valley of the Five Lakes", mi:3.4, ft:554, diff:"Moderate", rating:4.6, drive:"60 min",
+   lat:52.8120, lng:-118.0130, type:"Loop",
+   blurb:"Five lakes, each a different shade of green. The most photographed short hike in Jasper, so this one earns an early start.",
+   url:"https://www.alltrails.com/trail/canada/alberta/valley-of-the-five-lakes-loop"},
+  {n:25, group:5, name:"Whistlers Summit via SkyTram", mi:2.4, ft:915, diff:"Moderate", rating:4.8, drive:"55 min",
+   lat:52.8330, lng:-118.1200, type:"Out & back",
+   blurb:"The tram does the climbing; you walk the ridge to the summit. Book the tram ahead — it sells out in September.",
+   url:"https://www.alltrails.com/trail/canada/alberta/whistlers-summit-trail-with-jasper-tramway"}
 ];
 
 function directions(lat,lng){
@@ -266,7 +349,7 @@ document.getElementById('links').appendChild(liSkip);
     return;
   }
 
-  var map = L.map('map', {scrollWheelZoom:false}).setView([53.36,-117.72], 9);
+  var map = L.map('map', {scrollWheelZoom:false}).setView([53.15,-117.85], 8);
 
   var street = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom:18, attribution:'&copy; OpenStreetMap contributors'
@@ -343,4 +426,3 @@ document.getElementById('stamp').textContent =
 </script>
 </body>
 </html>
-
