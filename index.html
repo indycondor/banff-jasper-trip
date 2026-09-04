@@ -178,6 +178,8 @@ h2{
 ul{margin:10px 0;padding-left:19px}
 li{margin:6px 0}
 li::marker{color:var(--melt)}
+ol.jane-list{margin:16px 0;padding-left:26px;font-size:15.5px}
+ol.jane-list li{margin:10px 0;padding-left:4px}
 .tbl{width:100%;border-collapse:collapse;margin:14px 0 6px;font-size:15px}
 .tbl th{
   font-family:var(--disp);text-transform:uppercase;letter-spacing:.1em;
@@ -380,6 +382,7 @@ footer{
 
 <div class="tabs-nav">
   <div class="tabs-nav-inner">
+    <button class="tab-btn" data-tab="jane">Jane's Education</button>
     <button class="tab-btn active" data-tab="briefing">Briefing</button>
     <button class="tab-btn" data-tab="outbound">Outbound</button>
     <button class="tab-btn" data-tab="parkway">Parkway</button>
@@ -389,6 +392,32 @@ footer{
     <button class="tab-btn" data-tab="home">Home</button>
     <button class="tab-btn" data-tab="practical">Practical</button>
   </div>
+</div>
+
+<div id="jane" class="tab-content">
+
+<h2>Jane's Education · Field Curriculum</h2>
+
+<div class="adv teal">
+  <h3>Mission statement</h3>
+  <p>The group takes Jane's education very seriously. These are fundamentals she will not learn anywhere else, ever. Consider this our contribution to her development during the trip.</p>
+</div>
+
+<ol class="jane-list">
+  <li>Point at K-G and say something that sounds suspiciously like "old man" — plausible deniability fully intact, she's 1.</li>
+  <li>"Nope" as her answer to literally everything.</li>
+  <li>Raise her sippy cup and clink it every time someone says "cheers."</li>
+  <li>A dramatic, hand-to-forehead sigh whenever Doc starts a story.</li>
+  <li>Shrug and mouth "budget" whenever anyone asks about money.</li>
+  <li>Deploy a booger directly onto Dad mid-diaper-change, timed for maximum effect.</li>
+  <li>Blow raspberries while eating Danimals yogurt, distribution radius unrestricted.</li>
+</ol>
+
+<div class="adv gold">
+  <h3>The actual objective</h3>
+  <p>The goal is making Kelly furious without her being able to point to a single thing that's technically wrong with any of it.</p>
+</div>
+
 </div>
 
 <div id="briefing" class="tab-content active">
@@ -884,7 +913,7 @@ footer{
 
 <script>
 (function(){
-  const created = new Date('2026-09-04T02:52:50Z');
+  const created = new Date('2026-09-04T15:41:53Z');
   const opts = { year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit', timeZoneName:'short' };
   document.getElementById('timestamp').textContent = 'Updated ' + created.toLocaleString('en-US', opts);
 })();
