@@ -21,6 +21,8 @@
   --larch-w:#F6EEDC;
   --oxide:#8C241D;
   --oxide-w:#F7E7E5;
+  --done:#1E8B4C;
+  --done-w:#E4F6EC;
   --disp:"TeX Gyre Heros Cn","Helvetica Neue Condensed","Arial Narrow",Helvetica,sans-serif;
   --body:Charter,"Bitstream Charter","Iowan Old Style",Georgia,serif;
   --mono:"DejaVu Sans Mono",ui-monospace,Menlo,monospace;
@@ -42,6 +44,8 @@
     --larch-w:#2D2410;
     --oxide:#FF9999;
     --oxide-w:#3D1515;
+    --done:#57C98A;
+    --done-w:#12331F;
   }
 }
 
@@ -248,7 +252,14 @@ li::marker{color:var(--melt)}
 }
 .note.gold{background:var(--larch-w);border-left-color:var(--larch)}
 .note.red{background:var(--oxide-w);border-left-color:var(--oxide)}
+.note.done{background:var(--done-w);border-left-color:var(--done)}
 .note b{font-family:var(--body)}
+.donetag{
+  display:inline-block;font-family:var(--disp);text-transform:uppercase;
+  letter-spacing:.1em;font-size:10px;font-weight:700;color:#fff;
+  background:var(--done);padding:3px 8px 2px;margin-right:8px;
+  border-radius:2px;vertical-align:middle;line-height:1;
+}
 
 .stops{width:100%;border-collapse:collapse;margin:12px 0;font-size:14.5px}
 .stops td{padding:7px 10px 7px 0;border-bottom:1px solid var(--hair);transition:border-color 200ms}
@@ -481,23 +492,36 @@ footer{
       <p class="route">I-88 W → I-39 N → I-90 W → Rapid City</p>
       <p><strong>Leave 5:30am.</strong> The whole day is driving. Three drivers, rotate. I-90 is a straight shot west the entire way — no navigation complexity, just miles.</p>
       <p><strong>Stops:</strong> Madison (~3h) · <strong>Norske Nook in Osseo, WI</strong> for pie, mandatory (~4h45) · lunch somewhere in Minnesota · Wall Drug in Wall, SD because you cannot avoid it, nor should you try.</p>
-      <p>Pull into Rapid City around 7–8pm. If you hit the eastern edge of the Badlands on the way in at dusk, it costs you nothing — the Loop Road entrance is right off I-90 at Exit 131.</p>
+      <p>Pull into Rapid City around 7–8pm, with the eastern edge of the Badlands right off I-90 at Exit 131 on the way in.</p>
+      <div class="note done"><span class="donetag">✓ Completed</span><b>Badlands sunset stop — done tonight.</b> Caught the Loop Road pullouts at dusk off I-90 Exit 131 coming into town. Cost nothing, and it means Sept 4 skips the Badlands and swaps in Devils Tower instead.</div>
       <div class="note gold"><b>Tolls.</b> I-88 and I-90 in Illinois are Illinois Tollway. No transponder means pay online within 14 days or fees compound.</div>
     </div>
 
     <div class="day transit">
       <div class="dot"></div>
       <div class="dayhead"><span class="dt">Fri · Sept 4</span></div>
-      <h3>Badlands + Rushmore → Billings, MT</h3>
-      <div class="gauge"><div class="bar" style="width:65%"></div><span class="lbl">~340 miles driving · half day sightseeing</span></div>
-      <p class="route">Rapid City → Badlands Loop → Keystone → Billings via I-90 W</p>
-      <p><strong>Morning sightseeing, afternoon driving.</strong> No rush on the alarm — you earned a later start.</p>
+      <h3>Rushmore &amp; Devils Tower → Billings, MT</h3>
+      <div class="gauge"><div class="bar" style="width:65%"></div><span class="lbl">~400 miles · morning sights, afternoon drive</span></div>
+      <p class="route">Rapid City → Mount Rushmore → Devils Tower (Hwy 24 pullout) → Gillette → Billings via I-90 W</p>
+      <p><strong>Early out, sights before the crowds, lunch in Wyoming, then push to Billings.</strong> With the Badlands handled last night, today runs west instead of doubling back.</p>
       <ul>
-        <li><strong>Badlands Loop Road</strong> — 22 miles of alien landscape, stop at every pullout. Allow 2–3 hours. Enter at the Northeast Entrance off Hwy 240.</li>
-        <li><strong>Mount Rushmore</strong> — 1hr from the Badlands. Washington, Jefferson, Roosevelt, Lincoln, carved into granite. Parking garage $10. Allow 1–2 hours. No need to buy the audio tour.</li>
+        <li><strong>6:00am</strong> — Free breakfast opens at Home2 Suites</li>
+        <li><strong>7:00–7:30am</strong> — Depart the hotel</li>
+        <li><strong>~7:30–8:00am — Mount Rushmore.</strong> Parking $10 (card or cash).
+          <ul>
+            <li><strong>Grand View Terrace</strong> — 10 min</li>
+            <li><strong>Presidential Trail</strong> — partial out-and-back to the closer viewing point only, skipping the full stair loop. K-G's foot — or, as it's known on this trip, his "vintage suspension" — needs the mercy route.</li>
+            <li><strong>Avenue of Flags</strong> on the way back</li>
+            <li><strong>Visitor Center</strong> — quick pass through the exhibits, skip the film</li>
+          </ul>
+        </li>
+        <li><strong>~9:00–9:15am</strong> — Depart Rushmore, ahead of the day crowds</li>
+        <li><strong>~11:45am–12:00pm — Devils Tower viewpoint</strong> on WY Hwy 24 — free roadside pullout, ~4.5–5 mi view. This is the pullout, <em>not</em> the paid park entrance: skips the $25 fee and the 10am–3pm entrance line.</li>
+        <li><strong>~1:00–1:15pm — Lunch in Gillette, WY at The Coop.</strong> Backup: Lula Belle Cafe (closes 2:30pm).</li>
+        <li><strong>~2:00–2:15pm</strong> — Depart for Billings, MT</li>
       </ul>
-      <p>On the road by 1–2pm. Billings is 340 miles west on I-90, about 5 hours — easy afternoon drive through Wyoming and into Montana. <strong>You gain an hour entering Mountain Time</strong> if you haven't already.</p>
-      <div class="note"><b>Custer State Park and Crazy Horse Memorial</b> are right there if anyone wants more. Adds 1–2 hours. Your call on the road.</div>
+      <p>Billings is ~200 miles / ~3 hours northwest on I-90 from Gillette — all Mountain Time now, so no clock change. Into Billings for the evening.</p>
+      <div class="note"><b>Swap note.</b> Devils Tower replaces the Badlands Loop Road originally planned for today — the Badlands are now covered by last night's completed sunset stop.</div>
     </div>
 
     <div class="day transit big">
@@ -860,7 +884,7 @@ footer{
 
 <script>
 (function(){
-  const created = new Date('2026-08-30T19:58:34Z');
+  const created = new Date('2026-09-04T02:45:10Z');
   const opts = { year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit', timeZoneName:'short' };
   document.getElementById('timestamp').textContent = 'Updated ' + created.toLocaleString('en-US', opts);
 })();
